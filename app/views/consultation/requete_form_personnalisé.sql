@@ -1,0 +1,1 @@
+SELECT fe.libelle, fr.valeur FROM forms_results as fr INNER JOIN forms_elements as fe ON fr.forms_elements_id = fe.id INNER JOIN forms as f ON fe.forms_id = f.id INNER JOIN dossiers_consultations as ds ON fr.entity_id = ds.id INNER JOIN patients as p ON ds.patients_id = p.id WHERE fr.entity_type = 'c'

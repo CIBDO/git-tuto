@@ -1,0 +1,41 @@
+{
+  "name": "target_sih",
+  "authors": [
+    "ic4d developer team"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "amcharts3": "^3.20.12",
+    "jquery": "^2.2.4",
+    "sweetalert2": "^4.1.9",
+    "moment": "^2.14.1",
+    "bootstrap-datepicker": "^1.6.4",
+    "bootstrap-table": "^1.11.0",
+    "bootstrap-table-flatJSON": "git+https://github.com/djhvscf/bootstrap-table-flatJSON#^1.2.0",
+    "bootstrap-table-fixed-columns": "git+https://github.com/wenzhixin/bootstrap-table-fixed-columns#^1.0.0",
+    "select2": "^4.0.3",
+    "numeral": "^1.5.3",
+    "jquery.inputmask": "^3.3.1",
+    "tableExport.jquery.plugin": "^1.5.2",
+    "typeahead.js": "^0.11.1",
+    "bower": "*",
+    "install": "^1.0.4",
+    "bs-typeahead": "^0.0.5",
+    "AdminLTE": "admin-lte#^2.3.6",
+    "js-marker-clusterer": "*",
+    "font-awesome": "^4.6.3",
+    "JsBarcode": "jsbarcode#^3.3.20",
+    "jquery-ui": "^1.12.0"
+  }
+}

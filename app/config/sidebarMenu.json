@@ -1,0 +1,585 @@
+{
+    "index": {
+        "caption": "Dashboard",
+        "class": "fa fa-dashboard",
+        "controller": "index",
+        "action": "index",
+        "ajax": true
+    },
+    "modCaisse": {
+        "active" : 1,
+        "caption": "Caisse",
+        "permissions": ["venteticket_w","caisse_w", "caisse_r", "caisse_a"],
+        "class": "fa fa-credit-card",
+        "sub": {
+            "Ticket": {
+                "caption": "Ticket",
+                "permissions": ["venteticket_w", "caisse_a"],
+                "class": "fa fa-circle-o",
+                "controller": "caisse",
+                "action": "index",
+                "ajax": true
+            },
+            "Etat": {
+                "caption": "Etat",
+                "permissions": ["caisse_r", "caisse_w", "caisse_a"],
+                "class": "fa fa-circle-o",
+                "sub": {
+                    "DashboardCaisse": {
+                        "caption": "Dashboard",
+                        "class": "fa fa-bar-chart",
+                        "controller": "caisse",
+                        "action": "dashboard",
+                        "ajax": true
+                    },
+                    "ticketVendu": {
+                        "caption": "Tickets vendus",
+                        "controller": "caisse",
+                        "action": "etatTicket",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "ticketVenduDetails": {
+                        "caption": "Tickets vendus/Détails",
+                        "controller": "caisse",
+                        "action": "etatTicketDetails",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            }
+        }
+    },
+    "modDossierPatient": {
+        "active" : 1,
+        "caption": "Dossier Patient",
+        "permissions": ["dp_r", "dp_w", "dp_a"],
+        "class": "fa fa-file-o",
+        "sub": {
+            "Dashboard": {
+                "caption": "Dashboard",
+                "permissions": ["dp_r", "dp_w", "dp_a"],
+                "class": "fa fa-bar-chart",
+                "controller": "patients",
+                "action": "dashboard",
+                "ajax": true
+            },
+            "Creer": {
+                "caption": "Recherche/Visualisation",
+                "permissions": ["dp_r", "dp_w", "dp_a"],
+                "class": "fa fa-circle-o",
+                "controller": "patients",
+                "action": "index",
+                "ajax": true
+            }
+        }
+    },
+    "modConsultation": {
+        "active" : 1,
+        "caption": "Consultation",
+        "permissions": ["cs_r","cs_w","cs_a"],
+        "class": "fa fa-stethoscope",
+        "sub": {
+            "ListeAttente": {
+                "caption": "Liste d'attente",
+                "permissions": ["cs_r","cs_w", "cs_a"],
+                "class": "fa fa-circle-o",
+                "controller": "consultation",
+                "action": "listeAttente",
+                "ajax": true
+            },
+            "Etat": {
+                "caption": "Etat",
+                "permissions": ["cs_r","cs_w", "cs_a"],
+                "class": "fa fa-circle-o",
+                "sub": {
+                    "DashboardConsul": {
+                        "caption": "Dashboard",
+                        "class": "fa fa-bar-chart",
+                        "controller": "consultation",
+                        "action": "dashboard",
+                        "ajax": true
+                    },
+                    "ListeConsul": {
+                        "caption": "Liste des consultations",
+                        "controller": "consultation",
+                        "action": "liste",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "exportRTA": {
+                        "caption": "Export RTA",
+                        "controller": "consultation",
+                        "action": "exportRTA",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "ExportConsul": {
+                        "caption": "Export formulaire",
+                        "controller": "consultation",
+                        "action": "exportCustomForm",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            },
+            "Config": {
+                "caption": "Configuration",
+                "permissions": ["cs_a"],
+                "class": "fa fa-wrench",
+                "sub": {
+                    "MotifConsultation": {
+                        "caption": "Motif Consultation",
+                        "controller": "cs_motifs",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "fomulaires": {
+                        "caption": "Formulaires",
+                        "controller": "formulaires",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                     "DiagConsultation": {
+                        "caption": "Diagnostics",
+                        "controller": "diagnostic_source",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            }
+        }
+    },
+    "modPharmacie": {
+        "active" : 1,
+        "caption": "Pharmacie",
+        "permissions": ["ventemedic_w","ph_r","ph_w","ph_a"],
+        "class": "fa fa-medkit",
+        "id": "menu_pharmacie",
+        "sub": {
+            "Produits": {
+                "caption": "Produits",
+                "permissions": ["ph_r","ph_w","ph_a"],
+                "class": "fa fa-circle-o",
+                "controller": "produit",
+                "action": "index",
+                "ajax": true
+            },
+            "Vente_Medicament": {
+                "caption": "Vente de produit",
+                "permissions": ["ventemedic_w","ph_a"],
+                "class": "fa fa-circle-o",
+                "controller": "caisse_pharmacie",
+                "action": "index",
+                "ajax": true
+            },
+            "commandes": {
+                "caption": "Commandes",
+                "permissions": ["ph_a"],
+                "class": "fa fa-circle-o",
+                "controller": "commande",
+                "action": "index",
+                "ajax": true
+            },
+            "reception": {
+                "caption": "Réceptions",
+                "permissions": ["ph_a"],
+                "class": "fa fa-circle-o",
+                "controller": "reception",
+                "action": "index",
+                "ajax": true
+            },
+            "Distribution": {
+                "caption": "Stock point de distribution",
+                "permissions": ["ph_a"],
+                "class": "fa fa-circle-o",
+                "controller": "stock_point_distribution",
+                "action": "index",
+                "ajax": true
+            },
+            "Ajustement": {
+                "caption": "Ajustements",
+                "permissions": ["ph_a"],
+                "class": "fa fa-circle-o",
+                "controller": "ajustement",
+                "action": "index",
+                "ajax": true
+            },
+            "Inventaires": {
+                "caption": "Inventaires",
+                "permissions": ["ph_a"],
+                "class": "fa fa-circle-o",
+                "controller": "inventaire",
+                "action": "index",
+                "ajax": true
+            },
+            "Etats": {
+                "caption": "Etat",
+                "permissions": ["ph_r","ph_w","ph_a"],
+                "class": "fa fa-circle-o",
+                "sub": {
+                    "DashboardCaisse": {
+                        "caption": "Dashboard",
+                        "class": "fa fa-bar-chart",
+                        "controller": "caisse_pharmacie",
+                        "action": "dashboard",
+                        "ajax": true
+                    },
+                    "Appro": {
+                        "caption": "Approvisionnements",
+                        "class": "fa fa-circle-o",
+                        "controller": "approvisionnement",
+                        "action": "index",
+                        "ajax": true
+                    },
+                    "listeVente": {
+                        "caption": "Liste des ventes",
+                        "controller": "caisse_pharmacie",
+                        "action": "etatRecu",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "listeVenteDetails": {
+                        "caption": "Liste des ventes/Détails",
+                        "controller": "caisse_pharmacie",
+                        "action": "etatRecuDetails",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            },
+            "Config": {
+                "caption": "Configuration",
+                "permissions": ["ph_a"],
+                "class": "fa fa-wrench",
+                "sub": {
+                    "type_produit": {
+                        "caption": "Types de produit",
+                        "controller": "type_produit",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "forme_produit": {
+                        "caption": "Formes de produit",
+                        "controller": "forme_produit",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "classe_th": {
+                        "caption": "Classes therapeuthiques",
+                        "controller": "classe_therapeutique",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "point_distribution": {
+                        "caption": "Points de distribution",
+                        "controller": "point_distribution",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "fournisseur": {
+                        "caption": "Fournisseurs",
+                        "controller": "fournisseur",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "MotifAjustements": {
+                        "caption": "Motif Ajustements",
+                        "controller": "ajustement_motifs",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            }
+        }
+    },
+    "modLaboratoire": {
+        "active" : 1,
+        "caption": "Laboratoire",
+        "permissions": ["labo_r","labo_w","labo_a"],
+        "class": "fa fa-flask",
+        "id": "menu_labo",
+        "sub": {
+            "ListeAttente": {
+                "caption": "Liste d'attente",
+                "permissions": ["labo_r","labo_w","labo_a"],
+                "class": "fa fa-circle-o",
+                "controller": "labo_demandes",
+                "action": "listeAttente",
+                "ajax": true
+            },
+            "Liste_des_demandes": {
+                "caption": "Liste des demandes",
+                "permissions": ["labo_r","labo_w","labo_a"],
+                "class": "fa fa-circle-o",
+                "controller": "labo_demandes",
+                "action": "demandes",
+                "ajax": true
+            },
+            "EtatsLabo": {
+                "caption": "Etat",
+                "permissions": ["labo_r","labo_w","labo_a"],
+                "class": "fa fa-circle-o",
+                "sub": {
+                    "DashboardCaisse": {
+                        "caption": "Dashboard",
+                        "class": "fa fa-bar-chart",
+                        "controller": "labo_demandes",
+                        "action": "dashboard",
+                        "ajax": true
+                    }
+                }
+            },
+            "ConfigLabo": {
+                "caption": "Configuration",
+                "permissions": ["labo_w","labo_a"],
+                "class": "fa fa-wrench",
+                "sub": {
+                    "labo_categorie_analyse": {
+                        "caption": "Catégories d'analyse",
+                        "controller": "labo_categories_analyse",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "analyse": {
+                        "caption": "Analyses",
+                        "controller": "labo_analyses",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "antibiotique": {
+                        "caption": "Antibiotiques",
+                        "controller": "labo_antibiotiques",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "type_antibiogramme": {
+                        "caption": "Types d'antibiogramme",
+                        "controller": "labo_antibiogrammes_type",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "antibiogramme": {
+                        "caption": "Antibiogrammes",
+                        "controller": "labo_antibiogrammes",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            }
+        }
+    },
+    "modImagerie": {
+        "active" : 1,
+        "caption": "Imagérie",
+        "permissions": ["img_r","img_w","img_a"],
+        "class": "fa fa-clone",
+        "id": "menu_imagerie",
+        "sub": {
+            "ListeAttente": {
+                "caption": "Liste d'attente",
+                "permissions": ["img_r","img_w","img_a"],
+                "class": "fa fa-circle-o",
+                "controller": "img_demandes",
+                "action": "listeAttente",
+                "ajax": true
+            },
+            "Liste_des_demandes": {
+                "caption": "Liste des demandes",
+                "permissions": ["img_r","img_w","img_a"],
+                "class": "fa fa-circle-o",
+                "controller": "img_demandes",
+                "action": "demandes",
+                "ajax": true
+            },
+            "EtatsImg": {
+                "caption": "Etat",
+                "permissions": ["img_r","img_w","img_a"],
+                "class": "fa fa-circle-o",
+                "sub": {
+                    "DashboardImg": {
+                        "caption": "Dashboard",
+                        "class": "fa fa-bar-chart",
+                        "controller": "img_demandes",
+                        "action": "dashboard",
+                        "ajax": true
+                    }
+                }
+            },
+            "ConfigImg": {
+                "caption": "Configuration",
+                "permissions": ["img_w","img_a"],
+                "class": "fa fa-wrench",
+                "sub": {
+                    "img_categorie_items": {
+                        "caption": "Catégories d'actes",
+                        "controller": "img_items_categories",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "items": {
+                        "caption": "Actes",
+                        "controller": "img_items",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "itemsModel": {
+                        "caption": "Modeles de résultat",
+                        "controller": "img_modele",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            }
+        }
+    },
+    "modFinance": {
+        "active" : 1,
+        "caption": "Finance",
+        "permissions": ["f_r","f_w","f_a"],
+        "class": "fa fa-money",
+        "sub": {
+            "Operation": {
+                "caption": "Opérations",
+                "permissions": ["f_w","f_a"],
+                "class": "fa fa-circle-o",
+                "controller": "f_operation",
+                "action": "index",
+                "ajax": true
+            },
+            "Etats": {
+                "caption": "Etat",
+                "permissions": ["f_r","f_w","f_a"],
+                "class": "fa fa-circle-o",
+                "sub": {
+                   "DashboardFinance": {
+                        "caption": "Dashboard",
+                        "permissions": ["f_r","f_w","f_a"],
+                        "class": "fa fa-bar-chart",
+                        "controller": "f_operation",
+                        "action": "dashboard",
+                        "ajax": true
+                    },
+                    "EtatProgression": {
+                        "caption": "Suivi des prévisions<br> budgétaires",
+                        "class": "fa fa-circle-o",
+                        "controller": "f_planification",
+                        "action": "etatProgressPlanif",
+                        "ajax": true
+                    },
+                    "EtatRembourssement": {
+                        "caption": "Facturation",
+                        "class": "fa fa-circle-o",
+                        "controller": "f_rembourssement",
+                        "action": "index",
+                        "ajax": true
+                    }
+                }
+            },
+            "Config": {
+                "caption": "Configuration",
+                "permissions": ["f_a"],
+                "class": "fa fa-wrench",
+                "sub": {
+                    "Compte": {
+                        "caption": "Comptes",
+                        "controller": "f_compte",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "SousCompte": {
+                        "caption": "Sous Comptes",
+                        "controller": "f_sous_compte",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "Banque": {
+                        "caption": "Banques",
+                        "controller": "f_banque",
+                        "action": "index",
+                        "class": "fa fa-bank",
+                        "ajax": true
+                    },
+                    "Planification": {
+                        "caption": "Planification",
+                        "controller": "f_planification",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    }
+                }
+            }
+        }
+    },
+    "Configuration": {
+        "active" : 1,
+        "caption": "Configuration",
+        "permissions": ["conf_w", "conf_a"],
+        "class": "fa fa-gear",
+        "sub": {
+            "Services": {
+                "caption": "Services",
+                "controller": "services",
+                "action": "index",
+                "class": "fa fa-building",
+                "ajax": true
+            },
+            "User accounts": {
+                "caption": "Users",
+                "controller": "user",
+                "permissions": ["conf_a"],
+                "action": "index",
+                "class": "fa fa-users",
+                "ajax": true
+            },
+            "actes": {
+                "caption": "Prestations",
+                "controller": "actes",
+                "action": "index",
+                "class": "fa fa-circle-o",
+                "ajax": true
+            },
+            "orga_assurances": {
+                "caption": "Organismes d'assurance",
+                "controller": "type_assurance",
+                "action": "index",
+                "class": "fa fa-circle-o",
+                "ajax": true
+            },
+            "residence": {
+                "caption": "Residence",
+                "controller": "residence",
+                "action": "index",
+                "class": "fa fa-circle-o",
+                "ajax": true
+            },
+            "parametrage": {
+                "caption": "Paramétrage",
+                "controller": "parametrage",
+                "permissions": ["conf_a"],
+                "action": "index",
+                "class": "fa fa-wrench",
+                "ajax": true
+            }
+        }
+    }
+}

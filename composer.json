@@ -1,0 +1,12 @@
+{
+    "require-dev": {
+        "atoum/atoum": "~2.1"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "swiftmailer/swiftmailer": "@stable",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "piwik/device-detector": "@stable",
+        "spipu/html2pdf": "^4.6"
+    }
+}

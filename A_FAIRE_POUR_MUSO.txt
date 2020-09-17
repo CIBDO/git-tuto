@@ -1,0 +1,19 @@
+- ordre  hyphothese exam_comp  diagnos prescription **********
+- imc = poid/(taille*taille en m) *********** 
+- mettre option caher ou garder le formulaire fugé  *******
+- ajouter debut de la maladie dans export par formulaire personnelle *******
+- dans RTA afficher seulement diagnostique et non hypo **************
+- dans rpport form perso afficher à part HYP et DIAg **********
+- afficher adresse *******
+
+
+
+CELY ticket
+- Ajouter colonne montant cely
+afficher dans lordre suivant:
+	- Total AMO : (montant assure) 5000
+	- Total CELY: 1000
+	- Difference : 5000
+	- Prise en chage AMO : 3500
+	- Total ticket  moderateur: 1500
+	- Total du: 6500
