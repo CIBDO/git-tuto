@@ -32,7 +32,7 @@ class PatientsController extends ControllerBase {
                     "date2" => $data['date2']
                 ));
             }
-            
+
             foreach ($data as $key => $value) {
                 if($key == "date1" || $key == "date2" || $key == "_url" || $key == "PHPSESSID")
                     continue;
@@ -41,7 +41,7 @@ class PatientsController extends ControllerBase {
                     $bind[$key] = $value;
                 endif;
             }
-            //print_r($data);exit();
+//            print_r($data);exit();
 
             $patients = Patients::find( array($conditions, "bind" => $bind) );
         }

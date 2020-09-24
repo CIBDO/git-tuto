@@ -142,6 +142,13 @@
                         "class": "fa fa-circle-o",
                         "ajax": true
                     },
+                    "formulaires_asc": {
+                        "caption": "Formulaire ASC",
+                        "controller": "formulaires_asc",
+                        "action": "index",
+                        "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
                      "DiagConsultation": {
                         "caption": "Diagnostics",
                         "controller": "diagnostic_source",

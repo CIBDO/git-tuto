@@ -107,7 +107,7 @@
             <span class="pull-right hidden-xs">
                 <b>Version</b> 1.0.0
             </span>
-            <span><strong>Copyright &copy; 2016 <a href="#">IC4D</a>.</strong> Tous droits réservés .</span>
+            <span><strong>Copyright &copy; 2020 <a href="#">IC4D</a>.</strong> Tous droits réservés .</span>
         </footer>
 
         <!-- Add the sidebar's background. This div must be placed

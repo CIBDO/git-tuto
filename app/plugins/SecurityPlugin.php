@@ -45,6 +45,7 @@ class SecurityPlugin extends Plugin {
                 'useraccounts' => array('index', 'userslist', 'create', 'delete', 'modal', 'updateUser'),
                 'services' => array('index', 'createService', 'editService', 'deleteService', 'showChambre'),
                 'formulaires' => array('index', 'createFormulaires', 'editFormulaires', 'deleteFormulaires', "elements", 'deleteItem'),
+                'formulaires_asc' => array('index', 'createFormulaires', 'editFormulaires', 'deleteFormulaires', "elements", 'deleteItem'),
                 'patients' => array('index', 'form', 'dossier', 'assurancePopover', 'deleteAssurance', 'addAssurance', 'ajaxPatient', 'getAssuranceInfos', 'dashboard'),
                 'type_assurance' => array('index', 'createTypeAssurance', 'editTypeAssurance', 'deleteTypeAssurance'),
                 'type_produit' => array('index', 'createTypeProduit', 'editTypeProduit', 'deleteTypeProduit'),

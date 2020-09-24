@@ -7,6 +7,8 @@
         "swiftmailer/swiftmailer": "@stable",
         "mobiledetect/mobiledetectlib": "^2.8",
         "piwik/device-detector": "@stable",
-        "spipu/html2pdf": "^4.6"
+        "spipu/html2pdf": "^4.6",
+      "ext-curl": "*",
+        "ext-json": "*"
     }
 }

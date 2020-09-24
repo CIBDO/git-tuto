@@ -350,4 +350,7 @@ class ControllerBase extends Controller {
         
         return time();
     }
+    protected function objectToArray($object){
+        return json_decode(json_encode($object), true);
+    }
 }
