@@ -178,7 +178,7 @@ class OnaApi
         fclose($file);
     }
 
-    public static function postCsvMedia($name, $formId = 543955)
+    public static function postCsvMedia($name, $formId = 544798)
     {
 
         $cfile = new CurlFile(PUBLIC_DIR . 'files/csv/' . $name, 'text/csv');
@@ -212,23 +212,26 @@ class OnaApi
 
             $currentFormData = [];
             $submission_time = '';
-            foreach (array_reverse(json_decode(json_encode($data), true)) as $key2 => $value) {
-                if ($key2 === 'suivi') {
-                    $currentFormData[$key2] = $value[0];
+            if ($data!=="Not found."){
+                foreach (array_reverse(json_decode(json_encode($data), true)) as $key2 => $value) {
+                    if ($key2 === 'suivi') {
+                        $currentFormData[$key2] = $value[0];
+                    }
+                    if ($key2 === '_submission_time') {
+                        $submission_time = date('d-m-Y', strtotime($value));
+                    }
                 }
-                if ($key2 === '_submission_time') {
-                    $submission_time = date('d-m-Y', strtotime($value));
-                }
-            }
-            $currentFormData['suivi']['_submission_time'] = $submission_time;
-            if (isset($filter['id_p'])) {
-                if ($currentFormData['suivi']['suivi/id_p'] == $filter['id_p']) {
+                $currentFormData['suivi']['_submission_time'] = $submission_time;
+                if (isset($filter['id_p'])) {
+                    if ($currentFormData['suivi']['suivi/id_p'] == $filter['id_p']) {
+                        $response[$key] = $currentFormData['suivi'];
+                    }
+
+                } else {
                     $response[$key] = $currentFormData['suivi'];
                 }
-
-            } else {
-                $response[$key] = $currentFormData['suivi'];
             }
+
         }
         return $response;
     }
@@ -267,7 +270,7 @@ class OnaApi
         return $response;
     }
 
-    public static function deleteCsvMedia($name, $formId = 543955)
+    public static function deleteCsvMedia($name, $formId = 544798)
     {
         $media = self::getMetaData(['data_type' => 'media', 'data_value' => $name, 'xform' => $formId]);
         if (!(count($media) > 0)) {

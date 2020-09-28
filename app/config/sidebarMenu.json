@@ -88,14 +88,6 @@
                 "action": "listeAttente",
                 "ajax": true
             },
-            "Asc": {
-                "caption": "Liste ASC",
-                "permissions": ["cs_r","cs_w", "cs_a"],
-                "class": "fa fa-circle-o",
-                "controller": "asc",
-                "action": "index",
-                "ajax": true
-            },
             "Etat": {
                 "caption": "Etat",
                 "permissions": ["cs_r","cs_w", "cs_a"],
@@ -148,6 +140,14 @@
                         "controller": "formulaires",
                         "action": "index",
                         "class": "fa fa-circle-o",
+                        "ajax": true
+                    },
+                    "Asc": {
+                        "caption": "Liste ASC",
+                        "permissions": ["cs_r","cs_w", "cs_a"],
+                        "class": "fa fa-circle-o",
+                        "controller": "asc",
+                        "action": "index",
                         "ajax": true
                     },
                     "formulaires_asc": {

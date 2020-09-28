@@ -138,7 +138,7 @@ class PatientsController extends ControllerBase
         }
 
         $tmpLabo = [];
-        foreach ($patient->getLaboDemandes(array("order" => "date DESC")) as $key => $v) {
+        foreach ($patient->getLaboDemandes(array("order" => "date DESC")) as $k => $v) {
             $tmpLabo[$k]['id'] = $v->id;
             $tmpLabo[$k]['date'] = $v->date;
             $tmpLabo[$k]['type'] = "labo";
@@ -153,7 +153,7 @@ class PatientsController extends ControllerBase
         }
 
         $tmpImagerie = [];
-        foreach ($patient->getImgDemandes(array("order" => "date DESC")) as $key => $v) {
+        foreach ($patient->getImgDemandes(array("order" => "date DESC")) as $k => $v) {
             $tmpImagerie[$k]['id'] = $v->id;
             $tmpImagerie[$k]['date'] = $v->date;
             $tmpImagerie[$k]['type'] = "imagerie";
@@ -189,7 +189,9 @@ class PatientsController extends ControllerBase
         $this->view->patient_asc = ($tmp = $patient->getAsc()) ? $tmp->code_asc . ' ' . $tmp->prenom . ' ' . $tmp->nom : "";
         $this->view->patient_assurance = $patient_assurance;
         $this->view->patient_donnees_Hopital = $patient_donnees_Hopital;
-        $this->view->patient_donnees_asc = OnaApi::getFormSuivi('543955', ['id_p' => $patient->id_technique]);
+        $suivis = (count($response = OnaApi::getFormSuivi('544798', ['id_p' => $patient->id_technique]))>0)? $response:[];
+//        var_dump($suivis);exit();
+        $this->view->patient_donnees_asc = $suivis;
 
     }
 

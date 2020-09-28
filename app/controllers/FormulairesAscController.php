@@ -143,30 +143,30 @@ class FormulairesAscController extends ControllerBase
         if($file === "csv_suivi"){
             if (!(OnaApi::updateSuiviCsv()['error'])){
                 $this->flash->success("le Fichier csv_suivi.csv a été mis à jour");
-                $this->response->redirect("formulaires_asc/index/543955");
+                $this->response->redirect("formulaires_asc/index/544798");
             }else{
                 $this->flash->error("le Fichier csv_suivi.csv n'a pas pu être mis à jour");
-                $this->response->redirect("formulaires_asc/index/543955");
+                $this->response->redirect("formulaires_asc/index/544798");
             }
         }
 
         if($file === "liste_asc"){
             if (!(OnaApi::updateAscCsv()['error'])){
                 $this->flash->success("le Fichier liste_asc.csv a été mis à jour");
-                $this->response->redirect("formulaires_asc/index/543955");
+                $this->response->redirect("formulaires_asc/index/544798");
             }else{
                 $this->flash->error("le Fichier liste_asc.csv n'a pas pu être mis à jour");
-                $this->response->redirect("formulaires_asc/index/543955");
+                $this->response->redirect("formulaires_asc/index/544798");
             }
         }
 
-        if($file === "liste_patients"){
-            if (!(OnaApi::updateSuiviCsv()['error'])){
-                $this->flash->success("le Fichier liste_patients.csv a été mis à jour");
-                $this->response->redirect("formulaires_asc/index/543955");
+        if($file === "liste_patient"){
+            if (!(OnaApi::updatePatientsCsv()['error'])){
+                $this->flash->success("le Fichier liste_patient.csv a été mis à jour");
+                $this->response->redirect("formulaires_asc/index/544798");
             }else{
                 $this->flash->error("le Fichier liste_patients.csv n'a pas pu être mis à jour");
-                $this->response->redirect("formulaires_asc/index/543955");
+                $this->response->redirect("formulaires_asc/index/544798");
             }
         }
 

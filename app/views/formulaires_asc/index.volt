@@ -80,8 +80,8 @@
                             <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/liste_asc">
                                 Mettre à jour liste_asc.csv
                             </a>
-                            <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/liste_patients">
-                                Mettre à jour liste_patients.csv
+                            <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/liste_patient">
+                                Mettre à jour liste_patient.csv
                             </a>
                         </div>
 

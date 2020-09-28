@@ -421,7 +421,7 @@
                                                             <th> Q17</th>
                                                             <th> Q18</th>
                                                             <th> Q19</th>
-                                                            <th> Date RDV</th>
+                                                            <th> Date d'envoi</th>
                                                             </thead>
                                                             <tbody>
                                                             {% for index, pda in patient_donnees_asc %}

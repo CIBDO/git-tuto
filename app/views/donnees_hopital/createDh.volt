@@ -5,9 +5,9 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">
             {% if form_action == 'edit' %}
-                {{ trans['Modifier un produit'] }}
+                {{ trans['Modifier un RDV ASC'] }}
             {% else %}
-                {{ trans['Créer un produit'] }}
+                {{ trans['Créer un RDV ASC'] }}
             {% endif %}
             </h4>
         </div>
