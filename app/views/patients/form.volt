@@ -84,6 +84,10 @@
                           <label for="residence_id" class="control-label">{{ trans['Résidence'] }}</label>
                           {{ form.render('residence_id') }}
                       </div>
+                        <div class="form-group">
+                          <label for="asc_id" class="control-label">{{ trans['ASC'] }}</label>
+                          {{ form.render('asc_id') }}
+                      </div>
 
                       <div class="form-group">
                           <label for="adresse" class="control-label">{{ trans['Adresse'] }}</label>
@@ -188,6 +192,7 @@
 $(document).ready(function(){
     var width = "100%"; //Width for the select inputs
     $("#residence_id").select2({width: width, placeholder: "choisir", theme: "classic"});
+    $("#asc_id").select2({width: width, placeholder: "choisir", theme: "classic"});
     $("#sexe").select2({width: width, placeholder: "choisir", theme: "classic"});
 
     $("[data-mask]").inputmask();

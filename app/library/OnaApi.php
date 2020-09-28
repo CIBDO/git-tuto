@@ -12,7 +12,6 @@ class OnaApi
      */
     public static function get(array $params = [])
     {
-
         if (isset($params['type'], $params['type'])) {
             // Initiate curl session in a variable (resource)
             $curl_handle = curl_init();
@@ -69,7 +68,7 @@ class OnaApi
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
         $response = curl_exec($curl_handle);
-        $error = curl_error($curl_handle);
+        $error = curl_error($curl_handle) === "" ? false : true;
         curl_close($curl_handle);
         return ['response' => json_encode($response), 'error' => $error];
     }
@@ -91,7 +90,7 @@ class OnaApi
         curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data_json);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($curl_handle);
-        $error = curl_error($curl_handle);
+        $error = curl_error($curl_handle) === "" ? false : true;
         curl_close($curl_handle);
         return ['response' => json_encode($response), 'error' => $error];
     }
@@ -157,7 +156,9 @@ class OnaApi
         return $currentFormData;
     }
 
-//    $test = OnaApi::query($id,'query={"Votre_age":"28"}');
+    /*
+    * $test = OnaApi::query($id,'query={"Votre_age":"28"}');
+    */
     public static function query($formId, $query)
     {
         $response = [];
@@ -167,33 +168,21 @@ class OnaApi
         return $response;
     }
 
-    public static function createCsv($head, $body)
+    public static function createCsv($head, $body, $name)
     {
-        $file = fopen(PUBLIC_DIR . 'files/csv/csv_to_add.csv', 'w');
-//        head:array('Column 1', 'Column 2', 'Column 3', 'Column 4', 'Column 5');
+        $file = fopen(PUBLIC_DIR . 'files/csv/' . $name . '.csv', 'w');
         fputcsv($file, $head);
-
-//        body:array(
-//        array('Data 11', 'Data 12', 'Data 13', 'Data 14', 'Data 15'),
-//        array('Data 21', 'Data 22', 'Data 23', 'Data 24', 'Data 25'),
-//        array('Data 31', 'Data 32', 'Data 33', 'Data 34', 'Data 35'),
-//        array('Data 41', 'Data 42', 'Data 43', 'Data 44', 'Data 45'),
-//        array('Data 51', 'Data 52', 'Data 53', 'Data 54', 'Data 55')
-//    );
         foreach ($body as $row) {
             fputcsv($file, $row);
         }
         fclose($file);
     }
 
-    public static function addCsvFile($formId, $dataCsv = [])
+    public static function postCsvMedia($name, $formId = 543955)
     {
 
-//        if (isset($dataCsv['csv_data'])){
-//            self::createCsv();
-//        }
-        $cfile = new CurlFile(PUBLIC_DIR . 'files/csv/antecedant.csv', 'text/csv');
-        $data = array('data_file' => $cfile, 'data_type' => 'media', 'xform' => $formId, 'data_value' => 'mycsv.csv');
+        $cfile = new CurlFile(PUBLIC_DIR . 'files/csv/' . $name, 'text/csv');
+        $data = array('data_file' => $cfile, 'data_type' => 'media', 'xform' => $formId, 'data_value' => $name);
         $url = "https://api.ona.io/api/v1/metadata.json";
         $curl_handle = curl_init();
         curl_setopt($curl_handle, CURLOPT_URL, $url);
@@ -202,10 +191,162 @@ class OnaApi
         curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($curl_handle);
-        $error = curl_error($curl_handle);
+        $error = curl_error($curl_handle) === "" ? false : true;
         curl_close($curl_handle);
         return ['response' => json_encode($response), 'error' => $error];
     }
 
+    public static function getFormData($formId)
+    {
+        $response = [];
+        foreach (self::get(['type' => 'data', 'param' => '/' . $formId]) as $key => $data) {
+            $response[$key] = self::formatterOnaObject($data);
+        }
+        return $response;
+    }
+
+    public static function getFormSuivi($formId, $filter = [])
+    {
+        $response = [];
+        foreach (self::get(['type' => 'data', 'param' => '/' . $formId]) as $key => $data) {
+
+            $currentFormData = [];
+            $submission_time = '';
+            foreach (array_reverse(json_decode(json_encode($data), true)) as $key2 => $value) {
+                if ($key2 === 'suivi') {
+                    $currentFormData[$key2] = $value[0];
+                }
+                if ($key2 === '_submission_time') {
+                    $submission_time = date('d-m-Y', strtotime($value));
+                }
+            }
+            $currentFormData['suivi']['_submission_time'] = $submission_time;
+            if (isset($filter['id_p'])) {
+                if ($currentFormData['suivi']['suivi/id_p'] == $filter['id_p']) {
+                    $response[$key] = $currentFormData['suivi'];
+                }
+
+            } else {
+                $response[$key] = $currentFormData['suivi'];
+            }
+        }
+        return $response;
+    }
+
+
+    public static function getMetaData($filter = [])
+    {
+        $xform = '';
+        if (isset($filter['xform'])) {
+            $xform = '?xform=' . $filter['xform'];
+        }
+        $metadata = self::get(['type' => 'metadata', 'param' => $xform]);
+        $response = [];
+        $i = 0;
+        foreach (json_decode(json_encode($metadata), true) as $data) {
+            if (isset($filter['data_type'])) {
+                if ($filter['data_type'] === $data['data_type']) {
+                    if (isset($filter['data_value'])) {
+                        if ($filter['data_value'] === $data['data_value']) {
+                            $response[$i] = $data;
+                            $i++;
+                        }
+                    } else {
+                        $response[$i] = $data;
+                        $i++;
+                    }
+
+                }
+            } else {
+                $response[$i] = $data;
+                $i++;
+            }
+
+        }
+
+        return $response;
+    }
+
+    public static function deleteCsvMedia($name, $formId = 543955)
+    {
+        $media = self::getMetaData(['data_type' => 'media', 'data_value' => $name, 'xform' => $formId]);
+        if (!(count($media) > 0)) {
+            return ['response' => json_encode(""), 'error' => false];
+        }
+        $curl_handle = curl_init();
+        curl_setopt($curl_handle, CURLOPT_URL, "https://api.ona.io/api/v1/metadata/" . $media[0]['id']);
+        curl_setopt($curl_handle, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($curl_handle, CURLOPT_USERPWD, self::$USERPWD);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($curl_handle);
+        $error = curl_error($curl_handle) === "" ? false : true;
+        curl_close($curl_handle);
+        return ['response' => json_encode($response), 'error' => $error];
+    }
+
+    public static function updateSuiviCsv()
+    {
+        $csvBody = [];
+        foreach (DonneesHopital::find() as $k => $dh) {
+            $patient = $dh->getPatients();
+            $csvBody[$k][] = $k+1;
+            $csvBody[$k][] = $dh->code_asc;
+            $csvBody[$k][] = $patient->id_technique;
+            $csvBody[$k][] = $patient->nom;
+            $csvBody[$k][] = $patient->prenom;
+            $csvBody[$k][] = $dh->commentaire;
+            $csvBody[$k][] = date('Y-m-d', strtotime($dh->date_rdv));
+            $csvBody[$k][] = date('Y-m-d', strtotime($dh->created));
+            $csvBody[$k][] = "ASC:$dh->code_asc / $patient->prenom $patient->nom ID: $patient->id_technique / $dh->commentaire / Date RDV: $dh->date_rdv";
+        }
+
+        self::createCsv(
+            ['id', 'id_asc', 'id_technique', 'nom_patient', 'prenom_patient', 'commentaire_dtc', 'date_rdv', 'date_creation', 'print'],
+            $csvBody,
+            'csv_suivi');
+
+        self::deleteCsvMedia('csv_suivi.csv');
+        return self::postCsvMedia('csv_suivi.csv');
+
+    }
+    public static function updateAscCsv()
+    {
+        $csvBody = [];
+        foreach (Asc::find() as $k => $asc) {
+            $csvBody[$k][] = $asc->code_asc;
+            $csvBody[$k][] = $asc->nom;
+            $csvBody[$k][] = $asc->prenom;
+            $csvBody[$k][] = $asc->telephone;
+        }
+
+        self::createCsv(
+            ['id_asc', 'nom_asc', 'prenom_asc', 'telephone_asc'],
+            $csvBody,
+            'liste_asc');
+
+        self::deleteCsvMedia('liste_asc.csv');
+        return self::postCsvMedia('liste_asc.csv');
+
+    }
+    public static function updatePatientsCsv()
+    {
+        $csvBody = [];
+        foreach (Patients::find() as $k => $patient) {
+            $csvBody[$k][] = $k+1;
+            $csvBody[$k][] = $patient->id_technique;
+            $csvBody[$k][] = $patient->nom;
+            $csvBody[$k][] = $patient->prenom;
+            $csvBody[$k][] = ($tmp = $patient->getAsc()) ? $tmp->code_asc : "";
+        }
+
+        self::createCsv(
+            ['id','id_technique','nom_patient','prenom_patient','id_asc'],
+            $csvBody,
+            'liste_patient');
+
+        self::deleteCsvMedia('liste_patient.csv');
+        return self::postCsvMedia('liste_patient.csv');
+
+    }
 
 }

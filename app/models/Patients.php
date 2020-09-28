@@ -1,6 +1,8 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\Email as Email;
+
+use Phalcon\Validation;
+use Phalcon\Validation\Validator\Email as Email;
 
 class Patients extends \Phalcon\Mvc\Model
 {
@@ -150,6 +152,12 @@ class Patients extends \Phalcon\Mvc\Model
     public $residence_id;
 
     /**
+     *
+     * @var integer
+     */
+    public $asc_id;
+
+    /**
      * Validations and business logic
      *
      * @return boolean
@@ -177,33 +185,27 @@ class Patients extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
-        $this->hasMany('id', 'ConsultationListeAttente', 'patients_id', array('alias' => 'ConsultationListeAttente'));
-        $this->hasMany('id', 'DossiersConsultations', 'patients_id', array('alias' => 'DossiersConsultations'));
-        $this->hasMany('id', 'PatientsAntecedant', 'patients_id', array('alias' => 'PatientsAntecedant'));
-        $this->hasMany('id', 'PatientsAssurance', 'patients_id', array('alias' => 'PatientsAssurance'));
-        $this->hasMany('id', 'Prestations', 'patients_id', array('alias' => 'Prestations'));
-        $this->hasMany('id', 'LaboDemandes', 'patients_id', array('alias' => 'LaboDemandes'));
-        $this->hasMany('id', 'ImgDemandes', 'patients_id', array('alias' => 'ImgDemandes'));
-        $this->hasMany('id', 'RecuMedicament', 'patients_id', array('alias' => 'RecuMedicament'));
-        $this->hasMany('id', 'PharmacieWorkFlow', 'patients_id', array('alias' => 'PharmacieWorkFlow'));
-        $this->belongsTo('residence_id', 'Residence', 'id', array('alias' => 'Residence'));
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'patients';
+        $this->setSchema("target_db");
+        $this->setSource("patients");
+        $this->hasMany('id', 'ConsultationListeAttente', 'patients_id', ['alias' => 'ConsultationListeAttente']);
+        $this->hasMany('id', 'DonneesHopital', 'patients_id', ['alias' => 'DonneesHopital']);
+        $this->hasMany('id', 'DossiersConsultations', 'patients_id', ['alias' => 'DossiersConsultations']);
+        $this->hasMany('id', 'ImgDemandes', 'patients_id', ['alias' => 'ImgDemandes']);
+        $this->hasMany('id', 'LaboDemandes', 'patients_id', ['alias' => 'LaboDemandes']);
+        $this->hasMany('id', 'PatientsAntecedant', 'patients_id', ['alias' => 'PatientsAntecedant']);
+        $this->hasMany('id', 'PatientsAssurance', 'patients_id', ['alias' => 'PatientsAssurance']);
+        $this->hasMany('id', 'PharmacieWorkFlow', 'patients_id', ['alias' => 'PharmacieWorkFlow']);
+        $this->hasMany('id', 'Prestations', 'patients_id', ['alias' => 'Prestations']);
+        $this->hasMany('id', 'RecuMedicament', 'patients_id', ['alias' => 'RecuMedicament']);
+        $this->belongsTo('asc_id', '\Asc', 'id', ['alias' => 'Asc']);
+        $this->belongsTo('residence_id', '\Residence', 'id', ['alias' => 'Residence']);
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Patients[]
+     * @return Patients[]|Patients|\Phalcon\Mvc\Model\ResultSetInterface
      */
     public static function find($parameters = null)
     {
@@ -214,7 +216,7 @@ class Patients extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Patients
+     * @return Patients|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findFirst($parameters = null)
     {

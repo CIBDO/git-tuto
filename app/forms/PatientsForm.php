@@ -12,10 +12,12 @@ use Phalcon\Validation\Validator\Email as EmailValid;
 use Phalcon\Validation\Validator\Regex as RegexValidator;
 
 
-class PatientsForm extends Form {
+class PatientsForm extends Form
+{
 
-    public function initialize($trans) {
-        
+    public function initialize($trans)
+    {
+
         //id_technique
         $id_technique = new Text('id_technique', ["class" => "form-control input-md"]);
         $id_technique->setLabel($trans['ID Technique']);
@@ -98,9 +100,9 @@ class PatientsForm extends Form {
         $nom_jeune_fille->setFilters(array('striptags'));
         $this->add($nom_jeune_fille);
 
-         //Sexe
-        $sexe = new Select('sexe', array(   'm'  => 'Masculin', 'f'  => 'Feminin'),
-                                            ["class" => "form-control", "id" => "sexe", "required" => "required", "useEmpty" => true]);
+        //Sexe
+        $sexe = new Select('sexe', array('m' => 'Masculin', 'f' => 'Feminin'),
+            ["class" => "form-control", "id" => "sexe", "required" => "required", "useEmpty" => true]);
         $sexe->setLabel($trans['Sexe']);
         $sexe->addValidators(array(
             new PresenceOf(array(
@@ -144,17 +146,17 @@ class PatientsForm extends Form {
         $telephone->setLabel($trans['Telephone']);
         $telephone->setFilters(array('striptags'));
         $this->add($telephone);
-        
+
         //telephone2
         $telephone2 = new Text('telephone2', ["class" => "form-control input-md", 'data-inputmask' => '"mask": "99-99-99-99"', 'data-mask' => '']);
         $telephone2->setLabel($trans['Telephone2']);
         $telephone2->setFilters(array('striptags'));
         $this->add($telephone2);
-        
+
         //email
         $email = new Email('email', ["class" => "form-control input-md"]);
         $email->setLabel($trans['Email']);
-        $email->setFilters(array('striptags','email'));
+        $email->setFilters(array('striptags', 'email'));
         $this->add($email);
 
         //autre_infos
@@ -164,10 +166,10 @@ class PatientsForm extends Form {
         $this->add($autre_infos);
 
         //Residence_id
-        $residence_id = new Select( 'residence_id', 
-                                    Residence::find(),
-                                    ['using' => array('id', 'libelle'), "class" => "form-control", "id" => "residence_id", "required" => "required", "useEmpty" => true]
-                                );
+        $residence_id = new Select('residence_id',
+            Residence::find(),
+            ['using' => array('id', 'libelle'), "class" => "form-control", "id" => "residence_id", "required" => "required", "useEmpty" => true]
+        );
         $residence_id->setLabel($trans['Profil']);
         $residence_id->addValidators(array(
             new PresenceOf(array(
@@ -176,6 +178,18 @@ class PatientsForm extends Form {
         ));
         $residence_id->setFilters(array('striptags'));
         $this->add($residence_id);
+
+        //asc_id
+        $asc_id = new Select('asc_id',
+            Asc::query()
+                ->columns("id as id, CONCAT(code_asc, ' ', prenom, ' ', nom) as libelle")
+                ->orderBy("libelle")
+                ->execute(),
+            ['using' => array('id', 'libelle'), "class" => "form-control", "id" => "asc_id", "useEmpty" => true]
+        );
+        $asc_id->setLabel($trans['Profil']);
+        $asc_id->setFilters(array('striptags'));
+        $this->add($asc_id);
 
     }
 }

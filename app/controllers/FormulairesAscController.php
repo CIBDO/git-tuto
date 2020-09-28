@@ -32,7 +32,6 @@ class FormulairesAscController extends ControllerBase
         $this->view->forms = $forms;
 
         if ($id > 0) {
-//            var_dump(OnaApi::addCsvFile($id)); exit();
             $currentFormData = OnaApi::get(['type' => 'forms', 'param' => "/$id"]);
             if ($currentFormData) {
                 try {
@@ -107,7 +106,6 @@ class FormulairesAscController extends ControllerBase
     {
         $this->view->disable();
 
-//        var_dump($id);exit();
         if ($this->request->isAjax()) {
             $Onaresponse = OnaApi::delete(['type' => 'forms', 'param' => "/$id"]);
             if (!$Onaresponse) {
@@ -124,9 +122,7 @@ class FormulairesAscController extends ControllerBase
 
     public function deleteItemAction($id)
     {
-
         $this->view->disable();
-
 
     }
 
@@ -140,6 +136,42 @@ class FormulairesAscController extends ControllerBase
         $chaine = trim($chaine, '_');
         $chaine = strtolower($chaine);
         return $chaine;
+    }
+    public function updatecsvAction($file){
+        $this->view->disable();
+
+        if($file === "csv_suivi"){
+            if (!(OnaApi::updateSuiviCsv()['error'])){
+                $this->flash->success("le Fichier csv_suivi.csv a été mis à jour");
+                $this->response->redirect("formulaires_asc/index/543955");
+            }else{
+                $this->flash->error("le Fichier csv_suivi.csv n'a pas pu être mis à jour");
+                $this->response->redirect("formulaires_asc/index/543955");
+            }
+        }
+
+        if($file === "liste_asc"){
+            if (!(OnaApi::updateAscCsv()['error'])){
+                $this->flash->success("le Fichier liste_asc.csv a été mis à jour");
+                $this->response->redirect("formulaires_asc/index/543955");
+            }else{
+                $this->flash->error("le Fichier liste_asc.csv n'a pas pu être mis à jour");
+                $this->response->redirect("formulaires_asc/index/543955");
+            }
+        }
+
+        if($file === "liste_patients"){
+            if (!(OnaApi::updateSuiviCsv()['error'])){
+                $this->flash->success("le Fichier liste_patients.csv a été mis à jour");
+                $this->response->redirect("formulaires_asc/index/543955");
+            }else{
+                $this->flash->error("le Fichier liste_patients.csv n'a pas pu être mis à jour");
+                $this->response->redirect("formulaires_asc/index/543955");
+            }
+        }
+
+
+
     }
 
 }

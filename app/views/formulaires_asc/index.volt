@@ -71,9 +71,18 @@
                             <h3 class="box-title">{{ currentForms.title }}</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
-                            <a class="btn btn-info"
+                            <a style="margin-top: 5px" class="btn btn-primary"
                                href="{{ config.application.baseUri }}files/xls/{{ currentForms.formid }}.xls"
                                download="{{ currentForms.title }}.xls">Exporter les données</a>
+                            <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/csv_suivi">
+                                Mettre à jour csv_suivi.csv
+                            </a>
+                            <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/liste_asc">
+                                Mettre à jour liste_asc.csv
+                            </a>
+                            <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/liste_patients">
+                                Mettre à jour liste_patients.csv
+                            </a>
                         </div>
 
                     </div>
