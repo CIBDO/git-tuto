@@ -45,7 +45,7 @@ class DonneesHopitalController extends ControllerBase
         $this->view->partial('donnees_hopital/createDh');
     }
 
-    public function editDhAction($patient_id,$id) {
+    public function editDhAction($id) {
         $this->view->disable();
         $form = new DonneeHopitalForm($this->trans);
         $this->view->id = $id;
@@ -71,6 +71,7 @@ class DonneesHopitalController extends ControllerBase
                 $this->flash->error($msg);
                 return $this->view->partial("layouts/flash");
             }
+            OnaApi::updateSuiviCsv();
             $this->flash->success($this->trans['Donnée modifiée avec succès']);
             return $this->response->redirect("patients/dossier/".$dh->patients_id);
         }
@@ -97,6 +98,7 @@ class DonneesHopitalController extends ControllerBase
                 echo 0;
                 exit();
             }
+            OnaApi::updateSuiviCsv();
             echo 1;
             exit();
         }

@@ -15,10 +15,17 @@
 
     <!-- Main content -->
     <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <a type="button" class="btn btn-primary" href="{{ url('asc/') }}">
+                    <i class="fa fa-list"></i> {{ trans['Liste des ASC'] }}
+                </a>
+            </div>
+        </div>
         <form action="{{ url('asc/form/') }}" class="form ajaxForm" method="post">
             <!-- Main row -->
             <div class="row">
-                <section class="col-lg-6">
+                <section class="col-md-offset-3 col-lg-6">
                     <div>
                         <div class="box box-primary" style="width: 100%;padding: 0;margin: 0;">
                             <div class="box-header with-border">

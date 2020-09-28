@@ -109,7 +109,7 @@ class AscController extends ControllerBase
                 echo 0;
                 exit();
             }
-
+            OnaApi::updateAscCsv();
             echo 1;
             exit();
         }

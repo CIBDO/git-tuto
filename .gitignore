@@ -2,3 +2,4 @@ config.ini
 cache
 public/img/structure
 public/files
+.idea
