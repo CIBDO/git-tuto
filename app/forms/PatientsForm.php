@@ -167,7 +167,7 @@ class PatientsForm extends Form
 
         //Residence_id
         $residence_id = new Select('residence_id',
-            Residence::find(),
+            SousLocalite::find(),
             ['using' => array('id', 'libelle'), "class" => "form-control", "id" => "residence_id", "required" => "required", "useEmpty" => true]
         );
         $residence_id->setLabel($trans['Profil']);

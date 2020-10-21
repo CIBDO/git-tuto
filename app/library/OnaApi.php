@@ -1,6 +1,7 @@
 <?php
 
 
+
 class OnaApi
 {
 
@@ -208,12 +209,15 @@ class OnaApi
     public static function getFormSuivi($formId, $filter = [])
     {
         $response = [];
+        $i = 0;
+//        var_dump(self::get(['type' => 'data', 'param' => '/' . $formId]));exit();
         foreach (self::get(['type' => 'data', 'param' => '/' . $formId]) as $key => $data) {
 
             $currentFormData = [];
             $submission_time = '';
             if ($data!=="Not found."){
                 foreach (array_reverse(json_decode(json_encode($data), true)) as $key2 => $value) {
+                    if ($key2 ==='enrolement') continue 2;
                     if ($key2 === 'suivi') {
                         $currentFormData[$key2] = $value[0];
                     }
@@ -224,7 +228,8 @@ class OnaApi
                 $currentFormData['suivi']['_submission_time'] = $submission_time;
                 if (isset($filter['id_p'])) {
                     if ($currentFormData['suivi']['suivi/id_p'] == $filter['id_p']) {
-                        $response[$key] = $currentFormData['suivi'];
+                        $response[$i] = $currentFormData['suivi'];
+                        $i++;
                     }
 
                 } else {
@@ -320,10 +325,12 @@ class OnaApi
             $csvBody[$k][] = $asc->nom;
             $csvBody[$k][] = $asc->prenom;
             $csvBody[$k][] = $asc->telephone;
+            $csvBody[$k][] = '12345'.$asc->code_asc;
+            $csvBody[$k][] = 1;
         }
 
         self::createCsv(
-            ['id_asc', 'nom_asc', 'prenom_asc', 'telephone_asc'],
+            ['id_asc', 'nom_asc', 'prenom_asc', 'telephone_asc', 'password_asc', 'groupe_id'],
             $csvBody,
             'liste_asc');
 
@@ -349,6 +356,51 @@ class OnaApi
 
         self::deleteCsvMedia('liste_patient.csv');
         return self::postCsvMedia('liste_patient.csv');
+
+    }
+
+    public static function updateProfessionCsv()
+    {
+//        $csvBody = [];
+//        foreach (Patients::find() as $k => $patient) {
+//            $csvBody[$k][] = $k+1;
+//            $csvBody[$k][] = $patient->id_technique;
+//            $csvBody[$k][] = $patient->nom;
+//            $csvBody[$k][] = $patient->prenom;
+//            $csvBody[$k][] = ($tmp = $patient->getAsc()) ? $tmp->code_asc : "";
+//        }
+
+        $csvBody = [
+            [1,'Aucune'],
+            [2,'Enfant']
+        ];
+        self::createCsv(
+            ['id','libelle'],
+            $csvBody,
+            'csv_profession');
+
+        self::deleteCsvMedia('csv_profession.csv');
+        return self::postCsvMedia('csv_profession.csv');
+
+    }
+
+    public static function updateSousLocalitesCsv()
+    {
+        $csvBody = [];
+        foreach (SousLocalite::find() as $k => $sous_localite) {
+            $csvBody[$k][] = $sous_localite->id;
+            $csvBody[$k][] = $sous_localite->id_groupe;
+            $csvBody[$k][] = $sous_localite->libelle;
+        }
+
+        self::createCsv(
+            ['id', 'groupe_id', 'libelle'],
+
+            $csvBody,
+            'localite_liste');
+
+        self::deleteCsvMedia('localite_liste.csv');
+        return self::postCsvMedia('localite_liste.csv');
 
     }
 

@@ -587,6 +587,13 @@
                 "class": "fa fa-circle-o",
                 "ajax": true
             },
+            "sous_localite": {
+                "caption": "Sous localité",
+                "controller": "sous_localite",
+                "action": "index",
+                "class": "fa fa-circle-o",
+                "ajax": true
+            },
             "parametrage": {
                 "caption": "Paramétrage",
                 "controller": "parametrage",

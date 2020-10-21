@@ -1,0 +1,29 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2020-10-20 16:06
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Ousmane
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+CREATE TABLE IF NOT EXISTS `target_db`.`sous_localite` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `libelle` VARCHAR(100) NULL DEFAULT NULL,
+  `residence_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_sous_localite_residence1_idx` (`residence_id` ASC),
+  CONSTRAINT `fk_sous_localite_residence1`
+    FOREIGN KEY (`residence_id`)
+    REFERENCES `target_db`.`residence` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

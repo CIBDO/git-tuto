@@ -343,7 +343,8 @@
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#donnees_hopital" data-toggle="tab"
                                                               aria-expanded="true">Données hôpital</a></li>
-                                        <li class=""><a href="#donnees_asc" data-toggle="tab"
+                                        <li class=""><a href="#donnees_asc" data-toggle="modal"
+                                                        data-target="#donneesASC"
                                                         aria-expanded="false">Données ASC</a></li>
                                     </ul>
                                     <div class="tab-content">
@@ -396,64 +397,7 @@
                                         </div>
 
                                         <div class="tab-pane" id="donnees_asc">
-                                            <div class="row">
-                                                <div class="col-md-12">
 
-                                                    <div class="table-responsive no-padding">
-                                                        <table class="table table-hover" id="donnees_asc_liste">
-                                                            <thead>
-                                                            <th> Q1</th>
-                                                            <th> Q2</th>
-                                                            <th> Q3</th>
-                                                            <th> Q4</th>
-                                                            <th> Q5</th>
-                                                            <th> Q6</th>
-                                                            <th> Q7</th>
-                                                            <th> Q8</th>
-                                                            <th> Q9</th>
-                                                            <th> Q10</th>
-                                                            <th> Q11</th>
-                                                            <th> Q12</th>
-                                                            <th> Q13</th>
-                                                            <th> Q14</th>
-                                                            <th> Q15</th>
-                                                            <th> Q16</th>
-                                                            <th> Q17</th>
-                                                            <th> Q18</th>
-                                                            <th> Q19</th>
-                                                            <th> Date d'envoi</th>
-                                                            </thead>
-                                                            <tbody>
-                                                            {% for index, pda in patient_donnees_asc %}
-                                                                <tr>
-                                                                    <td>{{ pda['suivi/form_suivi1/q1'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q2'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q3'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q4'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q5'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q6'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q7'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q8'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q9'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q10'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q11'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q12'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q13'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi1/q14'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi2/q15'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi2/q16'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi2/q17'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi2/q18'] }}</td>
-                                                                    <td>{{ pda['suivi/form_suivi2/q19'] }}</td>
-                                                                    <td>{{ pda['_submission_time'] }}</td>
-
-                                                                </tr>
-                                                            {% endfor %}
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                     </div>
@@ -482,6 +426,89 @@
 <div id="showMerchant" class="modal fade" role="dialog"></div>
 <div id="createDh" class="modal largemodal fade" role="dialog"></div>
 <div id="editDh" class="modal largemodal fade" role="dialog"></div>
+<div id="donneesASC" class="modal fade" role="dialog">
+
+    <div class="modal-dialog" style="width: 100%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    Données ASC
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="table-responsive no-padding">
+                            <table class="table table-hover" id="donnees_asc_liste">
+                                <thead>
+                                <th> Q1</th>
+                                <th> Q2</th>
+                                <th> Q3</th>
+                                <th> Q4</th>
+                                <th> Q5</th>
+                                <th> Q6</th>
+                                <th> Q7</th>
+                                <th> Q8</th>
+                                <th> Q9</th>
+                                <th> Q10</th>
+                                <th> Q11</th>
+                                <th> Q12</th>
+                                <th> Q13</th>
+                                <th> Q14</th>
+                                <th> Q15</th>
+                                <th> Q16</th>
+                                <th> Q19</th>
+                                {% for i in 1..patient_donnees_asc[0]['suivi/form_suivi3/nombre_traitement'] %}
+                                    <th>Traitement {{ i}}</th>
+                                {% endfor %}
+                                <th> Date d'envoi</th>
+                                </thead>
+                                <tbody>
+                                {% for index, pda in patient_donnees_asc %}
+                                    <tr>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q1']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q2']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q3']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q4']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q5']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q6']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q7']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q8']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q9']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q10']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q11']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q12']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q13']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi4/q14']] }}</td>
+                                        <td>{{ pda['suivi/form_suivi2/q15'] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi2/q16']] }}</td>
+                                        <td>{{ format_q[pda['suivi/form_suivi2/q19']] }}</td>
+                                        {% for i in 1..pda['suivi/form_suivi3/nombre_traitement'] %}
+                                            <td>{{ pda['suivi/form_suivi3/traitement_'~i] }}</td>
+                                        {% endfor %}
+                                        <td>{{ pda['_submission_time'] }}</td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 
 <script type="text/javascript">

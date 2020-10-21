@@ -90,6 +90,7 @@ $di->set('volt', function ($view, $di) {
     $compiler->addFunction('date', 'date');
     $compiler->addFunction('in_array', 'in_array');
     $compiler->addFunction('number_format', 'number_format');
+    $compiler->addFunction('isset', 'isset');
 
     return $volt;
 }, true);

@@ -75,13 +75,20 @@
                                href="{{ config.application.baseUri }}files/xls/{{ currentForms.formid }}.xls"
                                download="{{ currentForms.title }}.xls">Exporter les données</a>
                             <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/csv_suivi">
+                                <i class="fa fa-arrow-circle-o-up"></i>
                                 Mettre à jour csv_suivi.csv
                             </a>
                             <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/liste_asc">
+                                <i class="fa fa-arrow-circle-o-up"></i>
                                 Mettre à jour liste_asc.csv
                             </a>
                             <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/liste_patient">
+                                <i class="fa fa-arrow-circle-o-up"></i>
                                 Mettre à jour liste_patient.csv
+                            </a>
+                            <a style="margin-top: 5px" class="btn btn-primary ajax-navigation" href="/formulaires_asc/updatecsv/localite_liste">
+                                <i class="fa fa-arrow-circle-o-up"></i>
+                                Mettre à jour localite_liste.csv
                             </a>
                         </div>
 

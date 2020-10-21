@@ -191,8 +191,10 @@ class PatientsController extends ControllerBase
         $this->view->patient_donnees_Hopital = $patient_donnees_Hopital;
         $suivis = (count($response = OnaApi::getFormSuivi('544798', ['id_p' => $patient->id_technique]))>0)? $response:[];
 //        var_dump($suivis);exit();
-        $this->view->patient_donnees_asc = $suivis;
 
+        $format_q = [1=>'Oui',2=>'Non'];
+        $this->view->patient_donnees_asc = $suivis;
+        $this->view->format_q = $format_q;
     }
 
     public function formAction($id = 0)

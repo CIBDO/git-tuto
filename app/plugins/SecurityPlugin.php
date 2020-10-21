@@ -52,6 +52,7 @@ class SecurityPlugin extends Plugin {
                 'type_assurance' => array('index', 'createTypeAssurance', 'editTypeAssurance', 'deleteTypeAssurance'),
                 'type_produit' => array('index', 'createTypeProduit', 'editTypeProduit', 'deleteTypeProduit'),
                 'residence' => array('index', 'createResidence', 'editResidence', 'deleteResidence'),
+                'sous_localite' => array('index', 'createSousLocalite', 'editSousLocalite', 'deleteSousLocalite'),
                 'forme_produit' => array('index', 'createFormeProduit', 'editFormeProduit', 'deleteFormeProduit'),
                 'produit' => array('index', 'createProduit', 'editProduit', 'deleteProduit', "ajaxProduit", "ajaxProduitCaisse", 'fiche'),
                 'commande' => array('index', 'createCommande', 'editCommande', 'deleteCommande', 'details', 'deleteDetailsItemCommande', 'ajaxProduit', 'detailsAjout'),
