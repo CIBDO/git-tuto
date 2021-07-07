@@ -19,7 +19,7 @@ class ControllerBase extends Controller {
 
         $this->view->setVar("isAjax", $this->request->isAjax());
         $this->view->setVar("scriptLoaded", 0);
-        $this->tag->prependTitle('Target | ');
+        $this->tag->prependTitle('Opsise Health | ');
         
         //js
         $this->_getJsAssets();

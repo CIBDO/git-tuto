@@ -19,9 +19,9 @@ return new \Phalcon\Config(array(
     'application' => array(
         'id' 			            => 1,
         'adminEmail'                => 'cofacoul@hotmail.fr',
-        'stucture_name_config'      => 'SIH - SIH',
-        'appName'                   => 'SIH',
-        'appShortName'              => 'SIH',
+        'stucture_name_config'      => 'Opsise Health',
+        'appName'                   => 'Opsise Health',
+        'appShortName'              => 'Opsise Health',
         'transExterne'              => false,
         'appDir'                    => APP_PATH . '/',
         'controllersDir'            => APP_PATH . '/controllers/',
