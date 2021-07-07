@@ -1,29 +1,52 @@
 <?php
+declare(strict_types=1);
+
+use Phalcon\Di\FactoryDefault;
 
 error_reporting(E_ALL);
 
-use Phalcon\Mvc\Application;
-use Phalcon\Config\Adapter\Ini as ConfigIni;
-
+define('BASE_PATH', dirname(__DIR__));
+define('APP_PATH', BASE_PATH . '/app');
+define('PUBLIC_DIR', BASE_PATH . '/public');
+define('VENDOR_PATH', BASE_PATH . '/vendor');
 try {
+    /**
+     * The FactoryDefault Dependency Injector automatically registers
+     * the services that provide a full stack framework.
+     */
+    $di = new FactoryDefault();
 
-    define('APP_PATH', realpath('..') . '/');
-    define('PUBLIC_DIR', realpath('.') . '/');
-    //Read the configuration
-    $config = new ConfigIni(APP_PATH . 'app/config/config.ini');
+    /**
+     * Read services
+     */
+    include APP_PATH . '/config/services.php';
 
-    // Auto-loader configuration
-    require APP_PATH . 'app/config/loader.php';
+    /**
+     * Handle routes
+     */
+    include APP_PATH . '/config/router.php';
 
-    //Load application services
-    require APP_PATH . 'app/config/services.php';
+    /**
+     * Get config service for use in inline setup below
+     */
+    $config = $di->getConfig();
 
-    $application = new Application($di);
+    /**
+     * Include Autoloader
+     */
+    include APP_PATH . '/config/loader.php';
 
-    echo $application->handle()->getContent();
+    //
+    //include VENDOR_PATH . '/autoload.php';
 
-   // $api = $di->get('api');
 
-} catch (Exception $e) {
-    echo $e->getMessage();
+    /**
+     * Handle the request
+     */
+    $application = new \Phalcon\Mvc\Application($di);
+
+    echo $application->handle($_SERVER['REQUEST_URI'])->getContent();
+} catch (\Exception $e) {
+    echo $e->getMessage() . '<br>';
+    echo '<pre>' . $e->getTraceAsString() . '</pre>';
 }

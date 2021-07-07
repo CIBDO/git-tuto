@@ -1,4 +1,4 @@
-# *atoum* [![Build Status](https://travis-ci.org/atoum/atoum.svg?branch=master)](https://travis-ci.org/atoum/atoum) [![Build status](https://ci.appveyor.com/api/projects/status/ir4vt58yxkt615i8/branch/master?svg=true)](https://ci.appveyor.com/project/jubianchi/atoum/branch/master) [![Coverage Status](https://coveralls.io/repos/github/atoum/atoum/badge.svg?branch=master)](https://coveralls.io/github/atoum/atoum?branch=master)
+# *atoum* [![Package version](https://img.shields.io/packagist/v/atoum/atoum.svg)](https://packagist.org/packages/atoum/atoum) [![Build Status](https://travis-ci.org/atoum/atoum.svg?branch=master)](https://travis-ci.org/atoum/atoum) [![Build status](https://ci.appveyor.com/api/projects/status/ir4vt58yxkt615i8/branch/master?svg=true)](https://ci.appveyor.com/project/jubianchi/atoum/branch/master)  [![Coverage Status](https://coveralls.io/repos/github/atoum/atoum/badge.svg?branch=master)](https://coveralls.io/github/atoum/atoum?branch=master) [![Gitter](https://badges.gitter.im/atoum/atoum.svg)](https://gitter.im/atoum/atoum?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## A simple, modern and intuitive unit testing framework for PHP!
 
@@ -22,7 +22,7 @@ Finally, even though it is developed mainly on UNIX, it can also work on Windows
 
 ## Why atoum?
 
-* *atoum* is really [easy to install](http://docs.atoum.org/en/latest/getting_started.html#installation): clone it [from github](https://github.com/atoum/atoum), download [its PHAR](http://downloads.atoum.org/) or simply [use composer](https://packagist.org/packages/atoum/atoum),
+* *atoum* is really [easy to install](http://docs.atoum.org/en/latest/installation.html): clone it [from github](https://github.com/atoum/atoum), download [its PHAR](https://github.com/atoum/atoum/releases/download/2.6.0/atoum.phar) or simply [use composer](https://packagist.org/packages/atoum/atoum),
 * *atoum* provides a high level of security during test execution by isolating each test method in its own PHP process. Of course, this feature is available out of the box, no need to install any additional extension,
 * *atoum* runs tests in a parallelized environment making the suite run as fast as possible by taking advantage of today's multi-core CPUs,
 * *atoum* provides a [full-featured set of natural and expressive assertions](http://docs.atoum.org/en/latest/asserters.html) making tests as readable as possible. Here is an example:
@@ -153,7 +153,7 @@ If `Xdebug v2.2.x` or equivalent gets displayed, then the module is properly ins
 
 ### Step 1: Install *atoum*
 
-You just have to download [its PHAR archive](http://downloads.atoum.org/nightly/atoum.phar) and store it where you wish, for example under `/path/to/project/tests/atoum.phar`.  
+You just have to download [its PHAR archive](https://github.com/atoum/atoum/releases/download/2.6.0/atoum.phar) and store it where you wish, for example under `/path/to/project/tests/atoum.phar`.  
 This PHAR archive contains the latest development version to pass the totality of *atoum*'s unit tests.  
 *atoum*'s source code is also available via [the github repository](https://github.com/atoum/atoum).  
 To check if *atoum* works correctly with your configuration, you can execute all its unit tests.  
@@ -284,7 +284,7 @@ However, if you want to further explore immediately *atoum*'s possibilities, we 
 ### *atoum*'s PHAR archive seems to not be working
 
 In this case, the first thing you will want to do is confirm whether you have the latest version of the archive.  
-You just need to [download](http://downloads.atoum.org/nightly/atoum.phar) it again.  
+You just need to [download](https://github.com/atoum/atoum/releases/download/2.6.0/atoum.phar) it again.  
 If it still doesn't work, run the following command in a terminal window:
 
 	# php -n atoum.phar -v
@@ -339,3 +339,25 @@ Looking for a roadmap?
 
 - [Here is](https://github.com/atoum/atoum/labels/In%20progress) the work in progress,
 - [And there](https://github.com/atoum/atoum/milestones/*) what will come in next releases.
+
+## Credits
+
+atoum has been created by [Frédéric Hardy]. It is now led by a strong community of contributors. You can find them 
+in the [committer list](https://github.com/atoum/atoum/graphs/contributors) or in the 
+[Contributors team](https://github.com/orgs/atoum/teams/contributors).
+
+We also would like to thank people who participated in the project in any way:
+
+* Mathieu Robin ([@MathRobin])
+* Geoffrey Bachelet ([@ubermuda])
+* Nathanaël Louison
+* Simon Jodet ([@simonjodet])
+
+## License
+
+atoum is released under the BSD-3-Clause License. See the bundled [LICENSE](LICENSE) file for details.
+
+[Frédéric Hardy]: https://github.com/mageekguy
+[@MathRobin]: https://github.com/MathRobin
+[@ubermuda]: https://github.com/ubermuda
+[@simonjodet]: https://github.com/simonjodet

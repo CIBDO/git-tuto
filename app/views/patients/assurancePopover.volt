@@ -4,7 +4,7 @@
 <form action="{{ url('patients/addAssurance/' ~ id) }}" class="form formAssurance" method="post">
     <div class="form-group">
         <label for="type_assurance_id" class="control-label">{{ trans['Organisme'] }}</label><br />
-        {{ select('type_assurance_id', typeAssurance , 'using' : ['id', 'libelle'], 'useEmpty' : true, 'emptyText' : 'Choisir', 'id' : '_type_assurance_id') }}
+        {{ select(['type_assurance_id', typeAssurance , 'using' : ['id', 'libelle'], 'useEmpty' : true, 'emptyText' : 'Choisir', 'id' : '_type_assurance_id']) }}
     </div>
     <div class="form-group">
         <label for="numero" class="control-label">{{ trans['Numéro'] }}</label><br />
@@ -12,11 +12,11 @@
     </div>
     <div class="form-group">
         <label for="ogd" class="control-label">{{ trans['OGD'] }}</label><br />
-        {{ select('ogd', ['inps' : 'inps', 'cmss' : 'cmss'], 'id' : '_ogd', 'useEmpty' : 'true', 'emptyText' : 'Choisir') }}
+        {{ select(['ogd', ['inps' : 'inps', 'cmss' : 'cmss'], 'id' : '_ogd', 'useEmpty' : 'true', 'emptyText' : 'Choisir']) }}
     </div>
     <div class="form-group">
         <label for="beneficiaire" class="control-label">{{ trans['Bénéficiaire'] }}</label><br />
-        {{ select('beneficiaire', ['titulaire' : 'titulaire', 'enfant' : 'enfant', 'parent' : 'parent'], 'id' : '_beneficiaire', 'useEmpty' : 'true', 'emptyText' : 'Choisir') }}
+        {{ select(['beneficiaire', ['titulaire' : 'titulaire', 'enfant' : 'enfant', 'parent' : 'parent'], 'id' : '_beneficiaire', 'useEmpty' : 'true', 'emptyText' : 'Choisir']) }}
     </div>
     <div class="form-group">
         <label for="autres_infos" class="control-label">{{ trans['Autres infos'] }}</label><br />

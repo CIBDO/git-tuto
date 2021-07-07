@@ -1,19 +1,20 @@
 <?php
+declare(strict_types=1);
 
-use Phalcon\Acl;
-use Phalcon\Acl\Role;
-use Phalcon\Acl\Resource;
-use Phalcon\Events\Event;
-use Phalcon\Mvc\User\Plugin;
-use Phalcon\Mvc\Dispatcher;
 use Phalcon\Acl\Adapter\Memory as AclList;
+use Phalcon\Acl\Component;
+use Phalcon\Acl\Role;
+use \Role as RoleModel;
+use Phalcon\Acl\Enum;
+use Phalcon\Di\Injectable;
+use Phalcon\Events\Event;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\Events\Manager;
 
 /**
  * SecurityPlugin
- *
- * This is the security plugin which controls that users only have access to the modules they're assigned to
  */
-class SecurityPlugin extends Plugin {
+class SecurityPlugin extends Injectable {
 
     /**
      * Returns an existing or new access control list
@@ -28,7 +29,7 @@ class SecurityPlugin extends Plugin {
 
             $acl = new AclList();
 
-            $acl->setDefaultAction(Acl::DENY);
+            $acl->setDefaultAction(Enum::ALLOW);
 
             //Register roles
             $roles = array(
@@ -107,7 +108,7 @@ class SecurityPlugin extends Plugin {
             );*/
 
             foreach ($privateResources as $resource => $actions) {
-                $acl->addResource(new Resource($resource), $actions);
+                $acl->addComponent(new \Component($resource), $actions);
             }
 
             //Public area resources
@@ -118,7 +119,7 @@ class SecurityPlugin extends Plugin {
             );
             
             foreach ($publicResources as $resource => $actions) {
-                $acl->addResource(new Resource($resource), $actions);
+                $acl->addComponent(new \Component($resource), $actions);
             }
 
             //Grant access to public areas to both users and guests
@@ -165,7 +166,7 @@ class SecurityPlugin extends Plugin {
         $acl = $this->getAcl();
 
         $allowed = $acl->isAllowed($role, $controller, $action);
-        if ($allowed != Acl::ALLOW && $action!="img") {
+        if ($allowed != Enum::ALLOW && $action!="img") {
             $dispatcher->forward(array(
                 'controller' => 'errors',
                 'action' => 'show401'

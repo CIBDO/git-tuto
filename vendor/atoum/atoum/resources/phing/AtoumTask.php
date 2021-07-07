@@ -26,6 +26,11 @@ class atoumTask extends task
 	private $codeCoverageTreemapUrl = null;
 	private $codeCoverageXunitPath = null;
 	private $codeCoverageCloverPath = null;
+	private $codeCoverageReportExtensionPath = null;
+	private $codeCoverageReportExtensionUrl = null;
+	private $branchAndPathCoverage = false;
+	private $telemetry = false;
+	private $telemetryProjectName = null;
 	private $atoumPharPath = null;
 	private $atoumAutoloaderPath = null;
 	private $phpPath = null;
@@ -63,6 +68,16 @@ class atoumTask extends task
 		return ($this->codeCoverage === true || $this->codeCoverageReportPath !== null || $this->codeCoverageTreemapPath !== null);
 	}
 
+	public function branchAndPathCoverageEnabled()
+	{
+		return ($this->branchAndPathCoverage === true);
+	}
+
+	public function telemetryEnabled()
+	{
+		return ($this->telemetry === true || $this->telemetryProjectName !== null);
+	}
+
 	public function createFileSet()
 	{
 		$this->fileSets[] = $fileSet = new Fileset();
@@ -91,7 +106,7 @@ class atoumTask extends task
 
 	public function main()
 	{
-		if ($this->codeCoverage && extension_loaded('xdebug') === false)
+		if (($this->codeCoverage || $this->branchAndPathCoverage) && extension_loaded('xdebug') === false)
 		{
 			throw new exception('AtoumTask depends on Xdebug being installed to gather code coverage information');
 		}
@@ -150,6 +165,10 @@ class atoumTask extends task
 		{
 			$this->runner->enableCodeCoverage();
 
+			if ($this->branchAndPathCoverageEnabled() === true) {
+				$this->runner->enableBranchesAndPathsCoverage();
+			}
+
 			if (($path = $this->codeCoverageCloverPath) !== null)
 			{
 				$clover = new atoum\reports\asynchronous\clover();
@@ -165,10 +184,33 @@ class atoumTask extends task
 				$report->addField($coverageHtmlField);
 			}
 
+			if (($path = $this->codeCoverageReportExtensionPath) !== null)
+			{
+				$coverage = new reports\coverage\html();
+				$coverage->addWriter(new atoum\writers\std\out());
+				$coverage->setOutPutDirectory($path);
+				$this->runner->addReport($coverage);
+			}
+
 			if (($path = $this->codeCoverageTreemapPath) !== null)
 			{
 				$report->addField($this->configureCoverageTreemapField($path, $coverageReportUrl));
 			}
+		}
+
+		if ($this->telemetryEnabled())
+		{
+			if (class_exists('mageekguy\atoum\reports\telemetry') === false) {
+				throw new exception('AtoumTask depends on atoum/reports-extension being installed to enable telemetry report');
+			}
+
+			$telemetry = new reports\telemetry();
+			$telemetry->addWriter(new atoum\writers\std\out());
+
+			if ($this->getTelemetryProjectName() !== null) {
+				$telemetry->setProjectName($this->getTelemetryProjectName());
+			}
+			$runner->addReport($telemetry);
 		}
 
 		if (($path = $this->codeCoverageXunitPath) !== null)
@@ -287,11 +329,47 @@ class atoumTask extends task
 		return $this->codeCoverage;
 	}
 
+	public function setBranchAndPathCoverage($branchAndPathCoverage)
+	{
+		$this->branchAndPathCoverage = (boolean) $branchAndPathCoverage;
+
+		return $this;
+	}
+
+	public function getBranchAndPathCoverage()
+	{
+		return $this->branchAndPathCoverage;
+	}
+
+	public function setTelemetry($telemetry)
+	{
+		$this->telemetry = (boolean) $telemetry;
+
+		return $this;
+	}
+
+	public function getTelemetry()
+	{
+		return $this->telemetry;
+	}
+
 	public function setAtoumPharPath($atoumPharPath)
 	{
 		$this->atoumPharPath = (string) $atoumPharPath;
 
 		return $this;
+	}
+
+	public function setTelemetryProjectName($telemetryProjectName)
+	{
+		$this->telemetryProjectName = (string) $telemetryProjectName;
+
+		return $this;
+	}
+
+	public function getTelemetryProjectName()
+	{
+		return $this->telemetryProjectName;
 	}
 
 	public function getAtoumPharPath()
@@ -419,6 +497,30 @@ class atoumTask extends task
 	public function getCodeCoverageReportUrl()
 	{
 		return $this->codeCoverageReportUrl;
+	}
+
+	public function setCodeCoverageReportExtensionPath($codeCoverageReportExtensionPath)
+	{
+		$this->codeCoverageReportExtensionPath = (string) $codeCoverageReportExtensionPath;
+
+		return $this;
+	}
+
+	public function getCodeCoverageReportExtensionPath()
+	{
+		return $this->codeCoverageReportExtensionPath;
+	}
+
+	public function setCodeCoverageReportExtensionUrl($codeCoverageReportExtensionUrl)
+	{
+		$this->codeCoverageReportExtensionUrl = (string) $codeCoverageReportExtensionUrl;
+
+		return $this;
+	}
+
+	public function getCodeCoverageReportExtensionUrl()
+	{
+		return $this->codeCoverageReportExtensionUrl;
 	}
 
 	public function setMaxChildren($maxChildren)

@@ -1,5 +1,59 @@
 # `dev-master`
 
+# 2.9.1 - 2017-07-19
+
+## Bugfix
+
+* [#691](https://github.com/atoum/atoum/pull/691) Fix how annotations are extracted. Only those actually starting with `@` are handled ([@jubianchi])
+* [#688](https://github.com/atoum/atoum/pull/688) Avoid reporting incorrect atoum path ([@hywan])
+
+# 2.9.0 - 2017-02-11
+
+* [#667](https://github.com/atoum/atoum/pull/667) Assert on array values using `mageekguy\atoum\asserters\phpArray::$values` ([@krtek4])
+* [#682](https://github.com/atoum/atoum/pull/682) Do not call parent class when mocking as interface ([@mageekguy])
+* [#679](https://github.com/atoum/atoum/pull/679) Copy `PHP_IDE_CONFIG` into forked processes ([@mvrhov])
+* [#678](https://github.com/atoum/atoum/pull/678) Each mock instance can be made unique by calling `eachInstanceIsUnique` on the mock generator ([@mageekguy])
+
+# 2.9.0-beta1 - 2016-10-08
+
+* [#604](https://github.com/atoum/atoum/pull/604) Add a `addConfigurationCallable` method on the runner to allow extensions to register themselves ([@agallou], [@jubianchi])
+* [#634](https://github.com/atoum/atoum/pull/634) Only one extension of a kind can be loaded. Extensions can be unloaded ([@agallou], [@jubianchi])
+* [#619](https://github.com/atoum/atoum/pull/619) Add branches and paths coverage support to AtoumTask for Phing ([@oxman])
+
+## Bugfix
+
+* [#633](https://github.com/atoum/atoum/pull/633) Mock generator correctly handles the `self` return type ([@jubianchi])
+* [#637](https://github.com/atoum/atoum/pull/637) Errors are displayed in the TAP report ([@jubianchi])
+
+# 2.8.2 - 2016-08-12
+
+* [#620](https://github.com/atoum/atoum/pull/620) Add HTML coverage report from [reports extension](https://github.com/atoum/reports-extension) to AtoumTask for Phing ([@oxman])
+* [#612](https://github.com/atoum/atoum/pull/612) Add telemetry support to AtoumTask ([@oxman])
+
+# 2.8.1 - 2016-07-01
+
+* [#611](https://github.com/atoum/atoum/pull/611) Exclude vendor and composer.lock from phar ([@jubianchi], [@agallou])
+
+# 2.8.0 - 2016-07-01
+
+* [#605](https://github.com/atoum/atoum/pull/605) Automatically include Composer's autoloader if it exists ([@jubianchi], [@agallou])
+* [#605](https://github.com/atoum/atoum/pull/605) Handle `.autoloader.atoum.php` files to define tests autoloader ([@jubianchi])
+* [#605](https://github.com/atoum/atoum/pull/605) Add the `--autoloader-file`/`-af` CLI argument to define which autoloader file to user ([@jubianchi])
+* [#596](https://github.com/atoum/atoum/pull/596) Test methods' tags are inherited from test classes ([@jubianchi])
+
+# 2.7.0 - 2016-06-20
+
+* [#594](https://github.com/atoum/atoum/pull/594) Add telemtry report to CI builds ([@jubianchi])
+
+## Bugfix
+
+* [#600](https://github.com/atoum/atoum/pull/600) Reports override correctly when using -ulr/-utr ([@jubianchi])
+* [#593](https://github.com/atoum/atoum/pull/593) Assertions on PHP 7 exceptions/throwables/errors are now working correctly ([@jubianchi])
+
+# 2.6.1 - 2016-04-08
+
+* [#590](https://github.com/atoum/atoum/pull/590) The `dateTime` asserter now fully supports `\dateTimeImmutable` ([@fferriere])
+
 # 2.6.0 - 2016-03-08
 
 * [#569](https://github.com/atoum/atoum/pull/569) Use in-memory cache for resolved asserters ([@jubianchi])
@@ -68,14 +122,14 @@
 * [#491](https://github.com/atoum/atoum/pull/491) Fix `getTestMethodPrefix` when the prefix is `"0"` ([@remicollet])
 * [#384](https://github.com/atoum/atoum/pull/384) Short syntax for base assertions ([@jubianchi])
 
-# 2.2.0 - 2015-07-31 
+# 2.2.0 - 2015-07-31
 
 * [#467](https://github.com/atoum/atoum/pull/467) Hide classes and methods coverage details in CLI report ([@jubianchi])
 * [#474](https://github.com/atoum/atoum/pull/474) Add the method return type and parameter type in the mock generator ([@guillaumeDievart])
 * [#470](https://github.com/atoum/atoum/pull/470) Add `isNotEmpty` asserter on `array` ([@metalaka])
 * [#476](https://github.com/atoum/atoum/pull/476) Add relative url root choice for code coverage report ([@n-couet])
 
-# 2.1.0 - 2015-05-08 
+# 2.1.0 - 2015-05-08
 
 * [#459](https://github.com/atoum/atoum/issues/459) Support branches and paths coverage with [Xdebug](http://xdebug.org/) 2.3 ([@jubianchi])
 * [#436](https://github.com/atoum/atoum/issues/436) Support old-style constructors in mocks ([@jubianchi])
@@ -177,3 +231,7 @@
 [@stephpy]: https://github.com/stephpy
 [@evert]: https://github.com/evert
 [@agallou]: https://github.com/agallou
+[@fferriere]: https://github.com/fferriere
+[@oxman]: https://github.com/blackprism
+[@mvrhov]: https://github.com/mvrhov
+[@krtek4]: https://github.com/krtek4

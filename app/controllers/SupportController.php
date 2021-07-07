@@ -21,7 +21,7 @@ class SupportController extends ControllerBase {
                 $api = $this->di->get('api');
                 $usr = $this->session->get('infosUsr')[0];
                 $api->sendMail(array(
-                "receiver" => $config->adminEmail['email'],
+                "receiver" => $config->application->adminEmail,
                 "template" => "sendQuestion", // A changer
                 "subject" => "SmartMerchant - Support | Questions au support",
                 "data" => array(

@@ -88,7 +88,7 @@
                                 <div class="col-md-12" >
                                     <div class="form-group  col-md-4">
                                         <label for="sexe" style="width: 100px">{{ trans['Sexe']}} :</label>
-                                        {{ select('sexe',  ['m' : 'Masculin', 'f' : 'Feminin'], 'useEmpty' : true, 'class': 'form-control', 'id' : '_sexe', 'required' : 'required') }}
+                                        {{ select(['sexe',  ['m' : 'Masculin', 'f' : 'Feminin'], 'useEmpty' : true, 'class': 'form-control', 'id' : '_sexe', 'required' : 'required']) }}
                                     </div>
 
                                     <div class="form-group  col-md-4">
@@ -99,7 +99,7 @@
                                     <div class="form-group  col-md-4">
                                         <label for="typeAssurance" style="width: 100px">{{ trans["Prise en charge"]}} :</label>
                                         <input type="hidden"  name="type_assurance_id" id="type_assurance_id" value="" /> 
-                                        {{ select('type_assurance', typeAssurancelist, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : '_type_assurance') }}
+                                        {{ select(['type_assurance', typeAssurancelist, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : '_type_assurance']) }}
                                     </div>
                                         
                                 </div>
@@ -115,11 +115,11 @@
 
                                     <div class="form-group  col-md-2">
                                         <label for="ogd" style="width: 100px">{{ trans['OGD']}} :</label><br>
-                                        {{ select('ogd', ['inps' : 'inps', 'cmss' : 'cmss'], 'class': 'form-control', 'id' : '_ogd', 'useEmpty' : true) }}
+                                        {{ select(['ogd', ['inps' : 'inps', 'cmss' : 'cmss'], 'class': 'form-control', 'id' : '_ogd', 'useEmpty' : true]) }}
                                     </div>
                                     <div class="form-group  col-md-2">
                                         <label for="beneficiaire" style="width: 100px">{{ trans['Bénéficiaire']}} :</label><br>
-                                        {{ select('beneficiaire', ['titulaire' : 'titulaire', 'enfant' : 'enfant', 'parent' : 'parent'], 'class': 'form-control', 'id' : '_beneficiaire', 'useEmpty' : true) }}
+                                        {{ select(['beneficiaire', ['titulaire' : 'titulaire', 'enfant' : 'enfant', 'parent' : 'parent'], 'class': 'form-control', 'id' : '_beneficiaire', 'useEmpty' : true]) }}
                                     </div>
                                     <div class="form-group  col-md-2">
                                         <label for="autres_infos" style="width: 100px">{{ trans['Autres infos']}} :</label><br>

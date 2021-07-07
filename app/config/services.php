@@ -1,103 +1,107 @@
 <?php
+declare(strict_types=1);
 
+use Phalcon\Escaper;
+use Phalcon\Flash\Session as Flash;
+use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Mvc\View;
-use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\Model\Metadata\Memory as MetaData;
-use Phalcon\Session\Adapter\Files as Session;
-use Phalcon\Flash\Session as FlashSession;
+use Phalcon\Session\Adapter\Stream as SessionAdapter;
+use Phalcon\Session\Manager as SessionManager;
+use Phalcon\Url as UrlResolver;
+
 use Phalcon\Events\Manager as EventsManager;
-use Phalcon\DI\FactoryDefault as DefaultDI;
-use Phalcon\Mvc\Url as UrlProvider;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\Session\Bag;
+
+use Phalcon\Acl\Adapter\Memory;
+
 use Phalcon\Crypt;
 use Phalcon\Http\Response\Cookies;
 use Phalcon\Db\Dialect\MySQL as SqlDialect;
-
+use Phalcon\Di\FactoryDefault;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
-$di = new DefaultDI();
+$di->setShared('config', function () {
+    return include APP_PATH . "/config/config.php";
+});
 
 /**
- * We register the events manager
+ * The URL component is used to generate all kind of urls in the application
  */
-$di->set('dispatcher', function () {
+$di->setShared('url', function () {
+    $config = $this->getConfig();
 
-    $eventsManager = new EventsManager;
+    $url = new UrlResolver();
+    $url->setBaseUri($config->application->baseUri);
+
+    return $url;
+});
+
+$di->set('dispatcher', function () {
+    $eventsManager = new EventsManager();
 
     /**
      * Check if the user is allowed to access certain action using the SecurityPlugin
      */
-    $eventsManager->attach('dispatch:beforeDispatch', new SecurityPlugin);
+    $eventsManager->attach('dispatch:beforeExecuteRoute', new SecurityPlugin);
 
     /**
      * Handle exceptions and not-found exceptions using NotFoundPlugin
      */
     $eventsManager->attach('dispatch:beforeException', new NotFoundPlugin);
 
-    $dispatcher = new Dispatcher;
+    $dispatcher = new Dispatcher();
     $dispatcher->setEventsManager($eventsManager);
 
     return $dispatcher;
 });
 
-/**
- * The URL component is used to generate all kind of urls in the application
- */
-$di->set('url', function () use ($config) {
-        $url = new UrlProvider();
-        $url->setBaseUri($config->application->baseUri);
-        return $url;
-    });
-
-
-$di->set('view', function () use ($config) {
+$di->setShared('view', function () {
+    $config = $this->getConfig();
 
     $view = new View();
+    $view->setDI($this);
+    $view->setViewsDir($config->application->viewsDir);
 
-    //$api = new Api($config->api->base_uri, $config->api->timeout);
+    $view->registerEngines([
+        '.volt' => function ($view) {
+            $config = $this->getConfig();
 
-    $view->setViewsDir(APP_PATH . $config->application->viewsDir);
+            $volt = new VoltEngine($view, $this);
 
-    $view->registerEngines(array(
-        ".volt" => 'volt'
-    ));
+            $volt->setOptions([
+                'path' => $config->application->cacheDir,
+                'separator' => '_'
+            ]);
+
+            $compiler = $volt->getCompiler();
+            $compiler->addFunction('is_a', 'is_a');
+            $compiler->addFunction('in_array', 'in_array');
+            $compiler->addFunction('strstr', 'strstr');
+            $compiler->addFunction('substr', 'substr');
+            $compiler->addFunction('strlen', 'strlen');
+            $compiler->addFunction('sizeof', 'sizeof'); 
+            $compiler->addFunction('count', 'count'); 
+            $compiler->addFunction('strtotime', 'strtotime');
+            $compiler->addFunction('date', 'date');
+            $compiler->addFunction('number_format', 'number_format');
+            $compiler->addFunction('isset', 'isset');
+
+            return $volt;
+        },
+        '.phtml' => PhpEngine::class
+    ]);
 
     return $view;
 });
-
-/**
- * Setting up volt
- */
-$di->set('volt', function ($view, $di) {
-
-    $volt = new VoltEngine($view, $di);
-
-    $volt->setOptions(array(
-        "compiledPath" => APP_PATH . "cache/volt/"
-    ));
-
-    $compiler = $volt->getCompiler();
-    $compiler->addFunction('is_a', 'is_a');
-    $compiler->addFunction('in_array', 'in_array');
-    $compiler->addFunction('strstr', 'strstr');
-    $compiler->addFunction('substr', 'substr');
-    $compiler->addFunction('strlen', 'strlen');
-    $compiler->addFunction('sizeof', 'sizeof'); 
-    $compiler->addFunction('count', 'count'); 
-    $compiler->addFunction('strtotime', 'strtotime');
-    $compiler->addFunction('date', 'date');
-    $compiler->addFunction('in_array', 'in_array');
-    $compiler->addFunction('number_format', 'number_format');
-    $compiler->addFunction('isset', 'isset');
-
-    return $volt;
-}, true);
-
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
+/*
 $di->set('db', function () use ($config) {
 
     $dialect = new SqlDialect();
@@ -128,11 +132,43 @@ $di->set('db', function () use ($config) {
 
     return $connection;
 });
+*/
+$di->setShared('db', function () {
+    $config = $this->getConfig();
 
+    $dialect = new SqlDialect();
+    // Register a new function called DIALECT_GET_AGE
+    $dialect->registerCustomFunction(
+        'DIALECT_GET_AGE',
+        function($dialect, $expression) {
+            $arguments = $expression['arguments'];
+            return sprintf(
+                " TIMESTAMPDIFF(YEAR, (%s), CURDATE() ) ",
+                $dialect->getSqlExpression($arguments[0])
+             );
+        }
+    );
+
+    $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
+    $params = [
+        'host'     => $config->database->host,
+        'username' => $config->database->username,
+        'password' => $config->database->password,
+        'dbname'   => $config->database->dbname,
+        'charset'  => $config->database->charset
+    ];
+    $params["dialectClass"] = $dialect;
+
+    if ($config->database->adapter == 'Postgresql') {
+        unset($params['charset']);
+    }
+
+    return new $class($params);
+});
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
-$di->set('api', function () use ($config) {
+$di->set('api', function () {
     $api = new Api($config->api->baseUri, $config->api->timeout);
     return $api;
 });
@@ -140,40 +176,49 @@ $di->set('api', function () use ($config) {
 /**
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
  */
-$di->set('modelsMetadata', function () {
-    return new MetaData();
+$di->setShared('modelsMetadata', function () {
+    return new MetaDataAdapter();
+});
+
+/**
+ * Register the session flash service with the Twitter Bootstrap classes
+ */
+$di->set('flash', function () {
+    $escaper = new Escaper();
+    $flash = new Flash($escaper);
+    $flash->setImplicitFlush(true);
+    $flash->setCssClasses([
+        'error'   => 'alert alert-danger',
+        'success' => 'alert alert-success',
+        'notice'  => 'alert alert-info',
+        'warning' => 'alert alert-warning'
+    ]);
+
+    return $flash;
+});
+
+$di->setShared('sessionBag', function () {
+    return new Bag('bag');
 });
 
 /**
  * Start the session the first time some component request the session service
  */
-$di->setShared('session', function () use ($config) {
-    $session = new Session(array(
+$di->setShared('session', function () {
+    $config = $this->getConfig();
+
+    $session = new SessionManager(array(
             'uniqueId' => 'my_session_' . $config->application->id
-        ));
+    ));
+    $files = new SessionAdapter([
+        'savePath' => sys_get_temp_dir(),
+    ]);
+    $session->setAdapter($files);
     $session->start();
+
     return $session;
 });
 
-/**
- * Register the flash service with custom CSS classes
- */
-$di->set("flash", function () {
-    $flash = new FlashSession();
-    return $flash;
-});
-
-/**
- * Register the flash service with custom CSS classes
- */
-$di->set('flash', function () {
-    return new FlashSession(array(
-        'error'   => 'alert alert-danger',
-        'success' => 'alert alert-success',
-        'notice'  => 'alert alert-info',
-        'warning' => 'alert alert-warning'
-    ));
-});
 
 // Cookie manager
 $di->set('cookies', function () {
@@ -198,11 +243,7 @@ $di->set("colorsPalette", function () {
 });
 
 //Init logger from library logger.php class
-Logger::init($config->logging);
-
-// Init config storing ( for access with $di in controllers )
-$di->set('config', $config);
-
+//Logger::init($config->logging);
 
 /**
  * Register a user component

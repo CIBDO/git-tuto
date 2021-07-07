@@ -61,7 +61,7 @@
                     <div class="box-body">
                       <div class="form-group">
                           <label for="pharmacie_type" class="control-label">{{ trans['Type de gestion'] }}</label>
-                          {{ select('pharmacie_type',  ['0' : 'Gestion mono-stock', '1' : 'Gestion multi-stock'], 'useEmpty' : false, 'class': 'form-control', 'id' : 'pharmacie_type', 'required' : 'required') }}
+                          {{ select(['pharmacie_type',  ['0' : 'Gestion mono-stock', '1' : 'Gestion multi-stock'], 'useEmpty' : false, 'class': 'form-control', 'id' : 'pharmacie_type', 'required' : 'required']) }}
                       </div>
 
                       <div class="form-group">
@@ -109,7 +109,7 @@
 
                       <div class="form-group">
                           <label for="diagnostic_source" class="control-label">{{ trans['Source de données diagnostic'] }}</label>
-                          {{ select('diagnostic_source',  ['ajaxCim10' : 'CIM10', 'ajaxDiagnostic' : 'Autre'], 'useEmpty' : false, 'class': 'form-control', 'id' : 'diagnostic_source', 'required' : 'required') }}
+                          {{ select(['diagnostic_source',  ['ajaxCim10' : 'CIM10', 'ajaxDiagnostic' : 'Autre'], 'useEmpty' : false, 'class': 'form-control', 'id' : 'diagnostic_source', 'required' : 'required']) }}
                       </div>
 
                     </div>
@@ -159,7 +159,7 @@
                       
                       <div class="form-group">
                           <label for="type_entete" class="control-label">{{ trans["Type d'entête"] }}</label>
-                          {{ select('type_entete',  ['e' : 'Entête complete en image', 'l' : 'Logo + 4 lignes'], 'useEmpty' : true, 'emptyText' : "Choisir", 'class': 'form-control', 'id' : 'type_entete') }}
+                          {{ select(['type_entete',  ['e' : 'Entête complete en image', 'l' : 'Logo + 4 lignes'], 'useEmpty' : true, 'emptyText' : "Choisir", 'class': 'form-control', 'id' : 'type_entete']) }}
                       </div>
 
                       <div class="form-group">
@@ -175,7 +175,7 @@
 
                       <div class="form-group">
                           <label for="pharmacie_type" class="control-label">{{ trans["Template d'affichage de l'entête"] }}</label>
-                          {{ select('template_logo',  ['left' : 'Logo à gauche - texte à droite', 'right' : 'Logo à droite - texte à gauche', 'top' : 'Logo en haut au milieu - texte en dessous'], 'useEmpty' : true, 'emptyText' : "Choisir", 'class': 'form-control', 'id' : 'template_logo') }}
+                          {{ select(['template_logo',  ['left' : 'Logo à gauche - texte à droite', 'right' : 'Logo à droite - texte à gauche', 'top' : 'Logo en haut au milieu - texte en dessous'], 'useEmpty' : true, 'emptyText' : "Choisir", 'class': 'form-control', 'id' : 'template_logo']) }}
                       </div>
 
                       <div class="form-group">

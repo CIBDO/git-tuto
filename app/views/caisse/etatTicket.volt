@@ -34,7 +34,7 @@
 
                                 <div class="form-group  col-md-2" style="margin-right : 10px">
                                     <label for="etat">{{ trans['Etat']}} :</label>
-                                    {{ select('etat',  ['1' : 'Validé', '0' : 'Annulé'], 'useEmpty' : false, 'class': 'form-control', 'required' : 'required') }}
+                                    {{ select(['etat',  ['1' : 'Validé', '0' : 'Annulé'], 'useEmpty' : false, 'class': 'form-control', 'required' : 'required']) }}
                                 </div>
 
                                 <div class="form-group  col-md-3">

@@ -6,7 +6,7 @@ namespace
 	{
 		interface dateTimeInterface {}
 
-		class dateTimeImmutable extends \dateTime {}
+		class dateTimeImmutable extends \dateTime implements dateTimeInterface {}
 	}
 }
 
@@ -110,7 +110,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasTimezone(new \DateTimezone('Europe/London')); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('now', $timezone = new \DateTimezone('Europe/Paris'))))
 				->then
@@ -138,7 +138,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasYear(rand(0, PHP_INT_MAX)); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('1976-10-06')))
 				->then
@@ -167,7 +167,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasMonth(rand(0, PHP_INT_MAX)); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('1976-09-06')))
 				->then
@@ -197,7 +197,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasDay(rand(0, PHP_INT_MAX)); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('1976-10-06')))
 				->then
@@ -227,7 +227,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasDate(1976, 10, 6); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('1976-10-06')))
 				->then
@@ -257,7 +257,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasHours(rand(0, PHP_INT_MAX)); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('01:02:03')))
 				->then
@@ -287,7 +287,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasMinutes(rand(0, PHP_INT_MAX)); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('01:02:03')))
 				->then
@@ -317,7 +317,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasSeconds(rand(0, PHP_INT_MAX)); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('01:02:03')))
 				->then
@@ -347,7 +347,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasTime(1, 2, 3); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('01:02:03')))
 				->then
@@ -377,7 +377,7 @@ namespace mageekguy\atoum\tests\units\asserters
 				->then
 					->exception(function() use ($asserter) { $asserter->hasDateAndTime(1981, 2, 13, 1, 2, 3); })
 						->isInstanceOf('mageekguy\atoum\exceptions\logic')
-						->hasMessage('Instance of \\dateTime is undefined')
+						->hasMessage('Value is not an instance of \\dateTime or \\dateTimeInterface')
 
 				->if($asserter->setWith($dateTime = new \DateTime('1981-02-13 01:02:03')))
 				->then
@@ -470,6 +470,39 @@ namespace mageekguy\atoum\tests\units\asserters
 					->exception(function($test) use (& $value) { $test->testedInstance->isImmutable(); })
 						->isInstanceOf('mageekguy\atoum\asserter\exception')
 						->hasMessage($notImmutable)
+			;
+		}
+
+		/** @php >= 5.5.0 */
+		public function testClassicUsageImmutableDateTime()
+		{
+			$this
+				->dateTime($value = new \DateTimeImmutable())
+					->isEqualTo($value);
+		}
+
+		public function testIsEqualTo(atoum\locale $locale)
+		{
+			$this
+				->given(
+					$this->newTestedInstance
+						->setLocale($locale),
+					$this->calling($locale)->_ = $notEqual = uniqid(),
+					$now = date(DATE_ISO8601)
+				)
+				->if($this->testedInstance->setWith(new \dateTime($now)))
+				->then
+					->object($this->testedInstance->isEqualTo(new \DateTime($now)))->isTestedInstance
+				->given(
+					$nowUTC = '2017-01-17 23:00:00+0000',
+					$nowUTCPlusOne = '2017-01-18 00:00:00+0100'
+				)
+				->if($this->testedInstance->setWith($value = new \dateTime($nowUTC)))
+				->then
+					->object($this->testedInstance->isEqualTo(new \dateTime($nowUTCPlusOne)))->isTestedInstance
+				->if($this->testedInstance->setWith($value = new \dateTime($nowUTCPlusOne)))
+				->then
+					->object($this->testedInstance->isEqualTo(new \dateTime($nowUTC)))->isTestedInstance
 			;
 		}
 	}

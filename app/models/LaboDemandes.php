@@ -82,22 +82,12 @@ class LaboDemandes extends \Phalcon\Mvc\Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'labo_demandes';
-    }
-
-    /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
      * @return LaboDemandes[]
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }

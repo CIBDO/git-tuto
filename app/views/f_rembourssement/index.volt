@@ -45,12 +45,12 @@
 
                                 <div class="form-group  col-md-3">
                                     <label for="typeAssurance">{{ trans["Tierce Payant"]}} :</label>
-                                    {{ select('type_assurance', typeAssurancelist, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'emptyText' : 'Choisir', 'id' : '_type_assurance') }}
+                                    {{ select(['type_assurance', typeAssurancelist, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'emptyText' : 'Choisir', 'id' : '_type_assurance']) }}
                                 </div>
 
                                  <div class="form-group  col-md-3">
                                     <label for="typeAssurance">{{ trans["OGD"]}} :</label><br>
-                                    {{ select('ogd', ['inps' : 'inps', 'cmss' : 'cmss'], 'class': 'form-control', 'useEmpty' : true, 'emptyText' : 'Choisir', 'id' : '_ogd') }}
+                                    {{ select(['ogd', ['inps' : 'inps', 'cmss' : 'cmss'], 'class': 'form-control', 'useEmpty' : true, 'emptyText' : 'Choisir', 'id' : '_ogd']) }}
                                 </div>
 
                                 <div class="form-group  col-md-2">

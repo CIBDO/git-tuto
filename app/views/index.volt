@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        {{ get_title() }}
+        <title>{{ get_title() }}s</title>
+
 
         {#
 	        {{ stylesheet_link('css/target.css') }}

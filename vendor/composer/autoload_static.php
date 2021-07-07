@@ -4,23 +4,37 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33
+class ComposerStaticInitc783fa4a1fd9bc1c5fb4732a03b28501
 {
     public static $files = array (
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '04c6c5c2f7095ccf6c481d3e53e1776f' => __DIR__ . '/..' . '/mustangostang/spyc/Spyc.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '75d4b1647cdbc77a59f72bcb74df0995' => __DIR__ . '/..' . '/spipu/html2pdf/html2pdf.class.php',
         '766ddebdb359eb94f1ba3ece4f768b10' => __DIR__ . '/..' . '/spipu/html2pdf/_class/exception.class.php',
         '585b118af784f8bbcc53fec65bb600cd' => __DIR__ . '/..' . '/spipu/html2pdf/_class/locale.class.php',
         '4148c0c72e9cb9146c3692e138ddcedc' => __DIR__ . '/..' . '/spipu/html2pdf/_class/myPdf.class.php',
         '24a5693ab78636f7a23448ee74523987' => __DIR__ . '/..' . '/spipu/html2pdf/_class/parsingHtml.class.php',
         '30eee86291d721c2174ad40239331e78' => __DIR__ . '/..' . '/spipu/html2pdf/_class/parsingCss.class.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php72\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
+            'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
+            'Symfony\\Polyfill\\Iconv\\' => 23,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -31,13 +45,38 @@ class ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'E' => 
+        array (
+            'Egulias\\EmailValidator\\' => 23,
+        ),
         'D' => 
         array (
+            'Doctrine\\Common\\Lexer\\' => 22,
             'DeviceDetector\\' => 15,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Php72\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
+        ),
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
+        ),
+        'Symfony\\Polyfill\\Iconv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-iconv',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -53,6 +92,14 @@ class ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Egulias\\EmailValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/egulias/email-validator/src',
+        ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
         ),
         'DeviceDetector\\' => 
         array (
@@ -71,8 +118,10 @@ class ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
         'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
+        'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
@@ -148,6 +197,7 @@ class ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33
         'mageekguy\\atoum\\exceptions\\runtime\\file' => __DIR__ . '/..' . '/atoum/atoum/classes/exceptions/runtime/file.php',
         'mageekguy\\atoum\\exceptions\\runtime\\unexpectedValue' => __DIR__ . '/..' . '/atoum/atoum/classes/exceptions/runtime/unexpectedValue.php',
         'mageekguy\\atoum\\extension' => __DIR__ . '/..' . '/atoum/atoum/classes/extension.php',
+        'mageekguy\\atoum\\extension\\aggregator' => __DIR__ . '/..' . '/atoum/atoum/classes/extension/aggregator.php',
         'mageekguy\\atoum\\extension\\configuration' => __DIR__ . '/..' . '/atoum/atoum/classes/extension/configuration.php',
         'mageekguy\\atoum\\factory\\builder' => __DIR__ . '/..' . '/atoum/atoum/classes/factory/builder.php',
         'mageekguy\\atoum\\factory\\builder\\closure' => __DIR__ . '/..' . '/atoum/atoum/classes/factory/builder/closure.php',
@@ -395,10 +445,10 @@ class ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit75c5a0f533b24c7834d0b694a832cc33::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc783fa4a1fd9bc1c5fb4732a03b28501::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc783fa4a1fd9bc1c5fb4732a03b28501::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc783fa4a1fd9bc1c5fb4732a03b28501::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc783fa4a1fd9bc1c5fb4732a03b28501::$classMap;
 
         }, null, ClassLoader::class);
     }

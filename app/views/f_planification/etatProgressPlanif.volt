@@ -22,7 +22,7 @@
                             <div class="row" style="margin-top : 10px">
                                 <div class="form-group  col-md-3" style="margin-right : 10px">
                                     <label for="date1">{{ trans['Année']}} :</label>
-                                        {{ select('annee',  annee, 'class': 'form-control', 'id' : 'annee', 'useEmpty' : true, 'emptyText' : 'Choisir') }}
+                                        {{ select(['annee',  annee, 'class': 'form-control', 'id' : 'annee', 'useEmpty' : true, 'emptyText' : 'Choisir']) }}
                                 </div>
 
                                 <div class="form-group  col-md-4">

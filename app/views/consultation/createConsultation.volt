@@ -116,14 +116,14 @@
                             </div>
                             <div class="box-body">
                               <b>REFERE ASC:</b> 
-                              {{ select('refere_asc',  ['oui' : 'oui', 'non' : 'non'], 'class': '', 'id' : 'refere_asc') }}
+                              {{ select(['refere_asc',  ['oui' : 'oui', 'non' : 'non'], 'class': '', 'id' : 'refere_asc']) }}
 
                               <br /><br />
 
                               <b>Début de la maladie:</b> 
                               {{ dateField(['debut_maladie', 'class': '', 'size': '70', 'id': 'debut_maladie', 'required' : 'required']) }} 
                               - 
-                              {{ select('debut_maladie_periode',  ['matin' : 'matin', 'après-midi' : 'après-midi', 'soir' : 'soir', 'nuit' : 'nuit'], 'useEmpty' : true, 'emptyText' : 'Quand?', 'class': '', 'id' : 'debut_maladie_periode', 'required' : 'required') }}
+                              {{ select(['debut_maladie_periode',  ['matin' : 'matin', 'après-midi' : 'après-midi', 'soir' : 'soir', 'nuit' : 'nuit'], 'useEmpty' : true, 'emptyText' : 'Quand?', 'class': '', 'id' : 'debut_maladie_periode', 'required' : 'required']) }}
 
                               <br /><br />
                               {{ textArea(['histoire', 'class': '', 'placeholder' : 'histoire de la maladie', 'style' : 'width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;' ]) }}

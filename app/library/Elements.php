@@ -1,13 +1,14 @@
 <?php
 
 use Phalcon\Mvc\User\Component;
+use \Phalcon\Di\Injectable;
 
 /**
  * Elements
  *
  * Helps to build UI elements for the application
  */
-class Elements extends Component {
+class Elements extends Injectable {
      
     /**
      * Builds sidebar menu.
@@ -17,7 +18,7 @@ class Elements extends Component {
 
         $controllerName = $this->view->getControllerName();
         $actionName = $this->view->getActionName();
-        $sidebarMenu = json_decode(file_get_contents(APP_PATH . "/app/config/sidebarMenu.json"));
+        $sidebarMenu = json_decode(file_get_contents(APP_PATH . "/config/sidebarMenu.json"));
         // Menu de profondeur 3 au maximum
         foreach ($sidebarMenu as $menu) {
             if(isset($menu->active) && $menu->active == 0)
@@ -57,8 +58,8 @@ class Elements extends Component {
      */
     private function buildTree($controllerName, $sub, $trans, $actionName) {
         //Permission
-        $permissions = json_decode($this->session->get('usr')['permissions']);
-        if($this->session->get('usr')['id'] != 1){
+        $permissions = json_decode($this->session->has('usr') ? $this->session->get('usr')['permissions'] : '');
+        if($this->session->has('usr') && $this->session->get('usr')['id'] != 1){
             if(isset($sub->permissions)){
                 $test = 1;
                 /*var_dump($sub->permissions);

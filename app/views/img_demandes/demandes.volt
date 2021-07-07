@@ -35,7 +35,7 @@
 
                                 <div class="form-group  col-md-2" style="margin-right : 10px">
                                     <label for="etat">{{ trans['Etat']}} :</label>
-                                    {{ select('etat',  ['encours' : 'encours', 'création' : 'création', 'clotûré' : 'clotûré'], 'useEmpty' : false, 'class': 'form-control') }}
+                                    {{ select(['etat',  ['encours' : 'encours', 'création' : 'création', 'clotûré' : 'clotûré'], 'useEmpty' : false, 'class': 'form-control']) }}
                                 </div>
 
                                 <div class="form-group  col-md-3">

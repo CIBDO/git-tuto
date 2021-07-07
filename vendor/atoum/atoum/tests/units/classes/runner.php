@@ -325,6 +325,20 @@ class runner extends atoum\test
 		;
 	}
 
+	public function testGetAutoloaderFile()
+	{
+		$this
+			->if($runner = new testedClass())
+			->and($includer = new \mock\mageekguy\atoum\includer())
+			->and($includer->getMockController()->includePath = function() {})
+			->and($runner->setIncluder($includer))
+			->then
+				->object($runner->setAutoloaderFile($path = uniqid()))->isIdenticalTo($runner)
+				->string($runner->getAutoloaderFile())->isEqualTo($path)
+				->mock($includer)->call('includePath')->withArguments($path)->once()
+		;
+	}
+
 	public function testHasReports()
 	{
 		$this
@@ -442,6 +456,29 @@ class runner extends atoum\test
 			->then
 				->array($runner->getReports())->isEqualTo(array($report1, $report2))
 				->array($runner->getObservers())->isEqualTo(array($report1, $report2))
+			->given(
+				$firstReport = new \mock\mageekguy\atoum\report(),
+				$secondReport = new \mock\mageekguy\atoum\report(),
+				$overrideReport = new \mock\mageekguy\atoum\report(),
+				$runner->removeReports()
+			)
+			->if(
+				$this->calling($firstReport)->isOverridableBy = function($report) use ($overrideReport) { return $report === $overrideReport; },
+				$this->calling($secondReport)->isOverridableBy = function($report) use ($overrideReport) { return $report !== $overrideReport; },
+				$runner->addReport($firstReport)
+			)
+			->when($runner->removeReports($secondReport))
+			->then
+				->array($runner->getReports())->isEmpty
+				->array($runner->getObservers())->isEmpty
+			->if(
+				$runner->addReport($firstReport),
+				$runner->addReport($secondReport)
+			)
+			->when($runner->removeReports($overrideReport))
+			->then
+				->array($runner->getReports())->isEqualTo(array($firstReport))
+				->array($runner->getObservers())->isEqualTo(array($firstReport))
 		;
 	}
 
@@ -470,26 +507,45 @@ class runner extends atoum\test
 		$this
 			->if($runner = new testedClass())
 			->then
-				->object($runner->getExtensions())->isEqualTo(new \splObjectStorage())
-				->array($runner->getObservers())->isEmpty()
-				->object($runner->removeExtension(new \mock\mageekguy\atoum\extension()))->isIdenticalTo($runner)
-				->object($runner->getExtensions())->isEqualTo(new \splObjectStorage())
+				->object($runner->getExtensions())->isInstanceOf('mageekguy\atoum\extension\aggregator')
+				->sizeOf($runner->getExtensions())->isZero
 				->array($runner->getObservers())->isEmpty()
 			->if($extension = new \mock\mageekguy\atoum\extension())
-			->and($otherExtension = new \mock\mageekguy\atoum\extension())
+			->and(
+				$this->mockClass('mageekguy\atoum\extension', 'otherMock', 'extension'),
+				$otherExtension = new \otherMock\extension()
+			)
 			->and($runner->addExtension($extension)->addExtension($otherExtension))
 			->then
 				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($extension, $otherExtension))
 				->array($runner->getObservers())->isEqualTo(array($extension, $otherExtension))
 				->object($runner->removeExtension(new \mock\mageekguy\atoum\extension()))->isIdenticalTo($runner)
-				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($extension, $otherExtension))
-				->array($runner->getObservers())->isEqualTo(array($extension, $otherExtension))
+				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($otherExtension))
+				->array($runner->getObservers())->isEqualTo(array($otherExtension))
+			->if($runner->addExtension($extension))
+			->then
+				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($otherExtension, $extension))
 				->object($runner->removeExtension($extension))->isIdenticalTo($runner)
 				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($otherExtension))
 				->array($runner->getObservers())->isEqualTo(array($otherExtension))
+			->if($runner->addExtension($extension))
+			->then
+				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($otherExtension, $extension))
+				->object($runner->removeExtension('mock\mageekguy\atoum\extension'))->isIdenticalTo($runner)
+				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($otherExtension))
+				->array($runner->getObservers())->isEqualTo(array($otherExtension))
 				->object($runner->removeExtension($otherExtension))->isIdenticalTo($runner)
-				->object($runner->getExtensions())->isEqualTo(new \splObjectStorage())
+				->object($runner->getExtensions())->isInstanceOf('mageekguy\atoum\extension\aggregator')
+				->sizeOf($runner->getExtensions())->isZero
 				->array($runner->getObservers())->isEmpty()
+			->if($extension = new \mock\mageekguy\atoum\extension())
+			->then
+				->exception(function() use ($runner, $extension) {
+						$runner->removeExtension($extension);
+					}
+				)
+					->isInstanceOf('mageekguy\atoum\exceptions\logic\invalidArgument')
+					->hasMessage('Extension ' . get_class($extension) . ' is not loaded')
 		;
 	}
 
@@ -498,19 +554,25 @@ class runner extends atoum\test
 		$this
 			->if($runner = new testedClass())
 			->then
-				->object($runner->getExtensions())->isEqualTo(new \splObjectStorage())
+				->object($runner->getExtensions())->isInstanceOf('mageekguy\atoum\extension\aggregator')
+				->sizeOf($runner->getExtensions())->isZero
 				->array($runner->getObservers())->isEmpty()
 				->object($runner->removeExtensions())->isIdenticalTo($runner)
-				->object($runner->getExtensions())->isEqualTo(new \splObjectStorage())
+				->object($runner->getExtensions())->isInstanceOf('mageekguy\atoum\extension\aggregator')
+				->sizeOf($runner->getExtensions())->isZero
 				->array($runner->getObservers())->isEmpty()
 			->if($extension = new \mock\mageekguy\atoum\extension())
-			->and($otherExtension = new \mock\mageekguy\atoum\extension())
+			->and(
+				$this->mockClass('mageekguy\atoum\extension', 'otherMock', 'extension'),
+				$otherExtension = new \otherMock\extension()
+			)
 			->and($runner->addExtension($extension)->addExtension($otherExtension))
 			->then
 				->array(iterator_to_array($runner->getExtensions()))->isEqualTo(array($extension, $otherExtension))
 				->array($runner->getObservers())->isEqualTo(array($extension, $otherExtension))
 				->object($runner->removeExtensions())->isIdenticalTo($runner)
-				->object($runner->getExtensions())->isEqualTo(new \splObjectStorage())
+				->object($runner->getExtensions())->isInstanceOf('mageekguy\atoum\extension\aggregator')
+				->sizeOf($runner->getExtensions())->isZero
 				->array($runner->getObservers())->isEmpty()
 		;
 	}

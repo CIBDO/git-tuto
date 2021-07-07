@@ -9,7 +9,7 @@
     {% endif %}
     <div class="form-group">
         <label for="libelle" class="control-label">{{ trans['Motif'] }}:</label>
-        {{ select('motif', motif, 'class': 'form-control', 'required' : 'required', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'motif') }}
+        {{ select(['motif', motif, 'class': 'form-control', 'required' : 'required', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'motif']) }}
     </div>
     <table class="table no-margin table-striped">
         <thead>

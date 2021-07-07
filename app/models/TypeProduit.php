@@ -24,22 +24,12 @@ class TypeProduit extends \Phalcon\Mvc\Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'type_produit';
-    }
-
-    /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
      * @return TypeProduit[]
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }

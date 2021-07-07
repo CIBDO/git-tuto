@@ -15,7 +15,7 @@
                     
                     <div class="form-group">
                         <label for="f_sous_compte_id" class="control-label">{{ trans["Veuillez selectionner l'acte"] }}</label>
-                        {{ select('imgItems_id', imgItems_id, 'class': 'form-control', 'useEmpty' : "true", "emptyText" : "Choisir...", 'required' : 'required', 'id' : 'analyse_id') }}
+                        {{ select(['imgItems_id', imgItems_id, 'class': 'form-control', 'useEmpty' : "true", "emptyText" : "Choisir...", 'required' : 'required', 'id' : 'analyse_id']) }}
                     </div>
 
                     {{ hiddenField(['patients_id', 'value' : patients_id]) }}

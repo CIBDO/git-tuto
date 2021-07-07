@@ -132,15 +132,6 @@ class DossiersConsultations extends \Phalcon\Mvc\Model
         $this->belongsTo('patients_id', 'Patients', 'id', array('alias' => 'Patients'));
     }
 
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'dossiers_consultations';
-    }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -148,7 +139,7 @@ class DossiersConsultations extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return DossiersConsultations[]
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }

@@ -1,6 +1,6 @@
 <?php
 
-require APP_PATH . "vendor/swiftmailer/swiftmailer/lib/swift_required.php";
+//require VENDOR_PATH . "/swiftmailer/swiftmailer/lib/swift_required.php";
 
 
 class AuthenController extends ControllerBase {

@@ -6,8 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Datamatrix' => $vendorDir . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
     'Mobile_Detect' => $vendorDir . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
+    'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'PDF417' => $vendorDir . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
     'QRcode' => $vendorDir . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
     'TCPDF' => $vendorDir . '/tecnickcom/tcpdf/tcpdf.php',
@@ -83,6 +85,7 @@ return array(
     'mageekguy\\atoum\\exceptions\\runtime\\file' => $vendorDir . '/atoum/atoum/classes/exceptions/runtime/file.php',
     'mageekguy\\atoum\\exceptions\\runtime\\unexpectedValue' => $vendorDir . '/atoum/atoum/classes/exceptions/runtime/unexpectedValue.php',
     'mageekguy\\atoum\\extension' => $vendorDir . '/atoum/atoum/classes/extension.php',
+    'mageekguy\\atoum\\extension\\aggregator' => $vendorDir . '/atoum/atoum/classes/extension/aggregator.php',
     'mageekguy\\atoum\\extension\\configuration' => $vendorDir . '/atoum/atoum/classes/extension/configuration.php',
     'mageekguy\\atoum\\factory\\builder' => $vendorDir . '/atoum/atoum/classes/factory/builder.php',
     'mageekguy\\atoum\\factory\\builder\\closure' => $vendorDir . '/atoum/atoum/classes/factory/builder/closure.php',

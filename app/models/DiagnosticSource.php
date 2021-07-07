@@ -15,15 +15,6 @@ class DiagnosticSource extends \Phalcon\Mvc\Model
      */
     public $libelle;
 
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'diagnostic_source';
-    }
 
     /**
      * Allows to query a set of records that match the specified conditions
@@ -31,7 +22,7 @@ class DiagnosticSource extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return DiagnosticSource[]
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }

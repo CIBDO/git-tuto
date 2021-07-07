@@ -7,7 +7,6 @@ use GuzzleHttp\Promise\RejectedPromise;
 use GuzzleHttp\Psr7;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 
 /**
  * Functions used to create and wrap handlers with handler middleware.
@@ -34,11 +33,12 @@ final class Middleware
                 $cookieJar = $options['cookies'];
                 $request = $cookieJar->withCookieHeader($request);
                 return $handler($request, $options)
-                    ->then(function ($response) use ($cookieJar, $request) {
-                        $cookieJar->extractCookies($request, $response);
-                        return $response;
-                    }
-                );
+                    ->then(
+                        function ($response) use ($cookieJar, $request) {
+                            $cookieJar->extractCookies($request, $response);
+                            return $response;
+                        }
+                    );
             };
         };
     }
@@ -57,7 +57,7 @@ final class Middleware
                     return $handler($request, $options);
                 }
                 return $handler($request, $options)->then(
-                    function (ResponseInterface $response) use ($request, $handler) {
+                    function (ResponseInterface $response) use ($request) {
                         $code = $response->getStatusCode();
                         if ($code < 400) {
                             return $response;
@@ -72,12 +72,17 @@ final class Middleware
     /**
      * Middleware that pushes history data to an ArrayAccess container.
      *
-     * @param array $container Container to hold the history (by reference).
+     * @param array|\ArrayAccess $container Container to hold the history (by reference).
      *
      * @return callable Returns a function that accepts the next handler.
+     * @throws \InvalidArgumentException if container is not an array or ArrayAccess.
      */
-    public static function history(array &$container)
+    public static function history(&$container)
     {
+        if (!is_array($container) && !$container instanceof \ArrayAccess) {
+            throw new \InvalidArgumentException('history container must be an array or object implementing ArrayAccess');
+        }
+
         return function (callable $handler) use (&$container) {
             return function ($request, array $options) use ($handler, &$container) {
                 return $handler($request, $options)->then(
@@ -97,7 +102,7 @@ final class Middleware
                             'error'    => $reason,
                             'options'  => $options
                         ];
-                        return new RejectedPromise($reason);
+                        return \GuzzleHttp\Promise\rejection_for($reason);
                     }
                 );
             };
@@ -177,7 +182,7 @@ final class Middleware
      *
      * @return callable Returns a function that accepts the next handler.
      */
-    public static function log(LoggerInterface $logger, MessageFormatter $formatter, $logLevel = LogLevel::INFO)
+    public static function log(LoggerInterface $logger, MessageFormatter $formatter, $logLevel = 'info' /* \Psr\Log\LogLevel::INFO */)
     {
         return function (callable $handler) use ($logger, $formatter, $logLevel) {
             return function ($request, array $options) use ($handler, $logger, $formatter, $logLevel) {

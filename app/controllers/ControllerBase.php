@@ -6,6 +6,10 @@ require('../vendor/autoload.php');
 use DeviceDetector\DeviceDetector;
 use Phalcon\Config\Adapter\Ini as IniConfig;
 
+use Phalcon\Translate\Adapter\NativeArray;
+use Phalcon\Translate\InterpolatorFactory;
+use Phalcon\Translate\TranslateFactory;
+
 class ControllerBase extends Controller {
 
     protected $isMobile;
@@ -33,8 +37,8 @@ class ControllerBase extends Controller {
         $this->view->setVar("trans", $this->getTranslation($language));
         $this->view->setVar("pageTitle", $this->getPageTitle());
         $this->view->setVar('controllerName', $this->router->getControllerName());
-        $this->view->userId = json_decode($this->session->get('usr')['id']);
-        $this->view->userPermissions = json_decode($this->session->get('usr')['permissions']);
+        $this->view->userId = json_decode($this->session->has('usr') ? $this->session->get('usr')['id'] : '');
+        $this->view->userPermissions = json_decode($this->session->has('usr') ? $this->session->get('usr')['permissions'] : '');
         $this->view->activeModules = $this->config->activeModules;
         $this->view->stucture_name_config = $this->config->application->stucture_name_config;
     }
@@ -172,21 +176,32 @@ class ControllerBase extends Controller {
      * @return \Phalcon\Translate\Adapter\NativeArray
      */
     public function getTranslation($language) {
+        $messages = [];
         if ($language == "fr") {
             //$this->session->set("language", $language);
             // Check if we have a translation file for that language
-            if (file_exists(APP_PATH . "app/languages/" . $language . ".php")) {
-                require APP_PATH . "app/languages/" . $language . ".php";
+            if (file_exists(APP_PATH . "/languages/" . $language . ".php")) {
+                require APP_PATH . "/languages/" . $language . ".php";
             }
         } else {
-            require APP_PATH . "app/languages/en.php";
+            require APP_PATH . "/languages/en.php";
         }
-
+        /*
         // Return a translation object
         return new \Phalcon\Translate\Adapter\NativeArray(
                 array(
             "content" => $messages
                 )
+        );
+        */
+        $interpolator = new InterpolatorFactory();
+        $factory      = new TranslateFactory($interpolator);
+
+        return $factory->newInstance(
+            'array',
+            [
+                'content' => $messages,
+            ]
         );
     }
 

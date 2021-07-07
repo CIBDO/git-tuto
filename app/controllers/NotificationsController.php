@@ -195,7 +195,7 @@ class NotificationsController extends ControllerBase {
                 $api = $this->di->get('api');
                 $usr = $this->session->get('infosUsr')[0];
                 $api->sendMail(array(
-                "receiver" => $config->adminEmail['email'],
+                "receiver" => $config->application->adminEmail,
                 "template" => "sendBox",
                 "subject" => "SmartMerchant - Notifications | Boite à idée",
                 "data" => array(

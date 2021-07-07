@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label for="_annee" class="control-label">{{ trans['Année'] }}</label>
-                    {{ select('annee',  annee, 'class': 'form-control', 'id' : '_annee', 'useEmpty' : true) }}
+                    {{ select(['annee',  annee, 'class': 'form-control', 'id' : '_annee', 'useEmpty' : true]) }}
                 </div>
 
                 <div class="form-group">
@@ -32,7 +32,7 @@
 
                 <div class="form-group">
                     <label for="f_sous_compte_id" class="control-label">{{ trans['Compte/Sous Compte'] }}</label>
-                    {{ select('f_sous_compte_id', f_sous_compte_id, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'f_sous_compte_id') }}
+                    {{ select(['f_sous_compte_id', f_sous_compte_id, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'f_sous_compte_id']) }}
                 </div>
 
                 <div class="form-group">

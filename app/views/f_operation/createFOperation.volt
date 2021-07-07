@@ -31,7 +31,7 @@
 
                                 <div class="form-group">
                                     <label for="f_sous_compte_id" class="control-label">{{ trans['Compte/Sous Compte'] }}</label>
-                                    {{ select('f_sous_compte_id', f_sous_compte_id, 'class': 'form-control','useEmpty' : 'true', 'required' : 'required', 'id' : 'f_sous_compte_id') }}
+                                    {{ select(['f_sous_compte_id', f_sous_compte_id, 'class': 'form-control','useEmpty' : 'true', 'required' : 'required', 'id' : 'f_sous_compte_id']) }}
                                 </div>
 
                                 <div class="form-group">
@@ -42,7 +42,7 @@
                             {% if form_action != 'edit' %}
                                 <div class="form-group">
                                     <label for="type_prevision" class="control-label">{{ trans["Nature de l'opération"] }}</label>
-                                    {{ select('type',  ["Espece" : "Espece (Solde: " ~ soldeEspece ~ ")", "Banque" : "Banque (Solde: " ~ soldeBanque ~ ")"], 'class': 'form-control', 'id' : 'type', 'required' : 'required', 'useEmpty' : 'true') }}
+                                    {{ select(['type',  ["Espece" : "Espece (Solde: " ~ soldeEspece ~ ")", "Banque" : "Banque (Solde: " ~ soldeBanque ~ ")"], 'class': 'form-control', 'id' : 'type', 'required' : 'required', 'useEmpty' : 'true']) }}
                                 </div>
                             {% endif %}
 
@@ -61,7 +61,7 @@
 
                                 <div class="form-group">
                                     <label for="f_banque_compte_id" class="control-label">{{ trans['Banque/Compte'] }}</label>
-                                    {{ select('f_banque_compte_id', f_banque_compte_id, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'f_banque_compte_id') }}
+                                    {{ select(['f_banque_compte_id', f_banque_compte_id, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'f_banque_compte_id']) }}
                                 </div>
 
                                 <div class="form-group">

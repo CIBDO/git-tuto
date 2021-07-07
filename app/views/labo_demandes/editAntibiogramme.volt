@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <label for="f_sous_compte_id" class="control-label">{{ trans['Antibiogramme'] }}</label>
-                    {{ select('antibiogramme', antibiogramme, 'class': 'form-control antibiogrammeChoser','useEmpty' : 'true', 'required' : 'required', 'id' : 'antibiogramme') }}
+                    {{ select(['antibiogramme', antibiogramme, 'class': 'form-control antibiogrammeChoser','useEmpty' : 'true', 'required' : 'required', 'id' : 'antibiogramme']) }}
                 </div>
 
                 <div id="detailsDiv"></div><br />

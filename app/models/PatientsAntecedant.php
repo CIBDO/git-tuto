@@ -47,7 +47,7 @@ class PatientsAntecedant extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return PatientsAntecedant[]
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }
@@ -61,16 +61,6 @@ class PatientsAntecedant extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'patients_antecedant';
     }
 
 }

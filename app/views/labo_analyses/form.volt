@@ -55,7 +55,7 @@
                        
                         <div class="form-group">
                             <label for="type_valeur" class="control-label">{{ trans['Type de valeur'] }}</label>
-                            {{ select('type_valeur',  ['n' : 'Numérique', 'a' : 'Alpha numérique', 'm' : 'Liste de choix'], 'useEmpty' : true, 'emptyText' : "Choisir", 'class': 'form-control', 'id' : 'type_valeur', 'required' : 'required') }}
+                            {{ select(['type_valeur',  ['n' : 'Numérique', 'a' : 'Alpha numérique', 'm' : 'Liste de choix'], 'useEmpty' : true, 'emptyText' : "Choisir", 'class': 'form-control', 'id' : 'type_valeur', 'required' : 'required']) }}
                         </div>
 
                         <div class="form-group">

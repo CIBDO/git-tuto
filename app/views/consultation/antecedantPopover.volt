@@ -4,7 +4,7 @@
     <form action="{{ url('consultation/addAntecedant/' ~ id) }}" class="form formAntecedant" method="post">
         <div class="form-group">
             <label for="type" class="control-label">{{ trans['Type'] }}</label><br />
-            {{ select('type', ['Médicaux' : 'Médicaux', 'Chirurgicaux' : 'Chirurgicaux', 'Gynéco-obstétrique' : 'Gynéco-obstétrique', 'Familiaux' : 'Familiaux'], 'id' : '_type', 'emptyText' : 'Choisir', 'useEmpty' : true) }}
+            {{ select(['type', ['Médicaux' : 'Médicaux', 'Chirurgicaux' : 'Chirurgicaux', 'Gynéco-obstétrique' : 'Gynéco-obstétrique', 'Familiaux' : 'Familiaux'], 'id' : '_type', 'emptyText' : 'Choisir', 'useEmpty' : true]) }}
         </div>
         <div class="form-group">
             <label for="libelle" class="control-label">{{ trans['Libellé'] }}</label><br />
@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label for="niveau" class="control-label">{{ trans['Niveau'] }}</label><br />
-            {{ select('niveau', ['normal' : 'normal', 'moyen' : 'moyen', 'important' : 'important'], 'id' : '_niveau', 'emptyText' : 'Choisir', 'useEmpty' : true) }}
+            {{ select(['niveau', ['normal' : 'normal', 'moyen' : 'moyen', 'important' : 'important'], 'id' : '_niveau', 'emptyText' : 'Choisir', 'useEmpty' : true]) }}
             {{ hiddenField(['patients_id', 'class': 'form-control', 'id' : '_patients_id', 'value': patients_id]) }}
 
         </div>

@@ -12,7 +12,7 @@
                 <div class="error_modal_container"></div>
                 <div class="form-group">
                     <label for="objet" class="control-label">Type</label>
-                    {{ select('type', ["perte" : "perte", "ajout" : "ajout"], 'class': 'form-control', 'useEmpty' : true, 'id' : 'type', 'required' : 'required') }}
+                    {{ select(['type', ["perte" : "perte", "ajout" : "ajout"], 'class': 'form-control', 'useEmpty' : true, 'id' : 'type', 'required' : 'required']) }}
                 </div>
                 <div class="recherche">
                     <div class="row">

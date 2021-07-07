@@ -12,7 +12,7 @@
                 <div class="error_modal_container"></div>
                 <div class="form-group">
                     <label for="objet" class="control-label">Point de reception</label>
-                    {{ select('point_distribution_id', pointDistribution, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'point_distribution_id', 'required' : 'required') }}
+                    {{ select(['point_distribution_id', pointDistribution, 'class': 'form-control', 'using' : ['id', 'libelle'], 'useEmpty' : true, 'id' : 'point_distribution_id', 'required' : 'required']) }}
                     {{ hiddenField(['reception_id']) }}
                 </div>
             </div>

@@ -24,12 +24,12 @@
                             <div class="row">
                                 <div class="form-group  col-md-5" style="margin-right : 10px">
                                     <label for="etat">{{ trans['Filtre']}} :</label>
-                                    {{ select('filtre',  ['tous' : 'Tous les produits', 'rupture' : 'Produits en rupture de stock', 'seuilMin' : 'Produits en dessous du seuil mininal'], 'useEmpty' : false, 'class': 'form-control', 'required' : 'required') }}
+                                    {{ select(['filtre',  ['tous' : 'Tous les produits', 'rupture' : 'Produits en rupture de stock', 'seuilMin' : 'Produits en dessous du seuil mininal'], 'useEmpty' : false, 'class': 'form-control', 'required' : 'required']) }}
                                 </div>
 
                                 <div class="form-group  col-md-4" style="margin-right : 10px">
                                    <!--  <label for="etat">{{ trans['Etat']}} :</label>
-                                    {{ select('etat',  ['actif' : 'Actif', 'inactif' : 'Inactif'], 'useEmpty' : false, 'class': 'form-control', 'required' : 'required') }} -->
+                                    {{ select(['etat',  ['actif' : 'Actif', 'inactif' : 'Inactif'], 'useEmpty' : false, 'class': 'form-control', 'required' : 'required']) }} -->
                                 </div>
 
                                 <div class="form-group  col-md-3">

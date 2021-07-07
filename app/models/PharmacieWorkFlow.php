@@ -36,22 +36,12 @@ class PharmacieWorkFlow extends \Phalcon\Mvc\Model
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'pharmacie_work_flow';
-    }
-
-    /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
      * @return PharmacieWorkFlow[]
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }

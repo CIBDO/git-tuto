@@ -119,7 +119,7 @@
 
                                     <div class="form-group  col-md-4">
                                         <label for="sexe" style="width: 100px">{{ trans['Sexe']}} :</label>
-                                        {{ select('sexe',  ['m' : 'Masculin', 'f' : 'Feminin'], 'useEmpty' : true, 'class': 'form-control', 'id' : '_sexe') }}
+                                        {{ select(['sexe',  ['m' : 'Masculin', 'f' : 'Feminin'], 'useEmpty' : true, 'class': 'form-control', 'id' : '_sexe']) }}
                                     </div>
 
                                     <div class="form-group  col-md-4">

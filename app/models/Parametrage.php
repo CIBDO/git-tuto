@@ -124,22 +124,12 @@ class Parametrage extends \Phalcon\Mvc\Model
     public $img_msg_fin;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'parametrage';
-    }
-
-    /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
      * @return Parametrage[]
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }

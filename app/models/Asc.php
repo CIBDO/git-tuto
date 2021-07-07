@@ -63,7 +63,7 @@ class Asc extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Asc[]|Asc|\Phalcon\Mvc\Model\ResultSetInterface
      */
-    public static function find($parameters = null)
+    public static function find($parameters = null): \Phalcon\Mvc\Model\ResultsetInterface
     {
         return parent::find($parameters);
     }

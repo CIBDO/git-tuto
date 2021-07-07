@@ -3,11 +3,10 @@
 namespace mageekguy\atoum\asserters;
 
 use
-	mageekguy\atoum\asserters,
 	mageekguy\atoum\exceptions
 ;
 
-class dateTime extends asserters\object
+class dateTime extends object
 {
 	public function __get($property)
 	{
@@ -211,9 +210,9 @@ class dateTime extends asserters\object
 
 	protected function valueIsSet($message = null)
 	{
-		$message = $message ?: 'Instance of \dateTime is undefined';
+		$message = $message ?: 'Value is not an instance of \\dateTime or \\dateTimeInterface';
 
-		if (parent::valueIsSet($message)->value instanceof \dateTime === false)
+		if (self::isDateTime(parent::valueIsSet($message)->value) === false)
 		{
 			throw new exceptions\logic($message);
 		}
