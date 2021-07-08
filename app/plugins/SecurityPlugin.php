@@ -21,15 +21,21 @@ class SecurityPlugin extends Injectable {
      *
      * @returns AclList
      */
-    public function getAcl() {
-
+    public function getAcl(): AclList {
         //throw new \Exception("something");
 
         //if (!isset($this->persistent->acl)) {
 
-            $acl = new AclList();
+        if (isset($this->persistent->acl)) {
+            return $this->persistent->acl;
+        }
 
-            $acl->setDefaultAction(Enum::ALLOW);
+        $acl = new AclList();
+        $acl->setDefaultAction(Enum::DENY);
+
+            //$acl = new AclList();
+
+            //$acl->setDefaultAction(Enum::ALLOW);
 
             //Register roles
             $roles = array(
@@ -108,7 +114,7 @@ class SecurityPlugin extends Injectable {
             );*/
 
             foreach ($privateResources as $resource => $actions) {
-                $acl->addComponent(new \Component($resource), $actions);
+                $acl->addComponent(new Component($resource), $actions);
             }
 
             //Public area resources
@@ -119,7 +125,7 @@ class SecurityPlugin extends Injectable {
             );
             
             foreach ($publicResources as $resource => $actions) {
-                $acl->addComponent(new \Component($resource), $actions);
+                $acl->addComponent(new Component($resource), $actions);
             }
 
             //Grant access to public areas to both users and guests
@@ -139,10 +145,10 @@ class SecurityPlugin extends Injectable {
             }
 
             //The acl is stored in session, APC would be useful here too
+            //The acl is stored in session, APC would be useful here too
             $this->persistent->acl = $acl;
-       //}
 
-        return $this->persistent->acl;
+            return $acl;
     }
 
     /**
@@ -151,11 +157,21 @@ class SecurityPlugin extends Injectable {
      * @param Event $event
      * @param Dispatcher $dispatcher
      */
-    public function beforeDispatch(Event $event, Dispatcher $dispatcher) {
+    public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher) {
 
-        $auth = $this->session->get('usr');
+        //$auth = $this->session->get('usr');
+        //$auth = $this->session->has("usr") && ($this->session->get("usr") != null);
+        $auth = $this->session->get("usr");
         if (!$auth) {
-            $role = 'Guests';
+            if ($dispatcher->getControllerName() != 'authen' && $dispatcher->getActionName() != 'login') {
+                return $dispatcher->forward(array(
+                'controller' => 'authen',
+                'action' => 'index'
+                ));
+                return false;
+            }
+            return;
+
         } else {
             $role = 'Users';
         }
@@ -173,13 +189,6 @@ class SecurityPlugin extends Injectable {
             ));
             //$this->session->destroy();
             return false;
-        }
-
-        if (!$auth && $controller!="authen"){
-            $dispatcher->forward(array(
-                'controller' => 'authen',
-                'action' => 'index'
-            ));
         }
 
     }
