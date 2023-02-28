@@ -40,9 +40,6 @@ class FormeProduit extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FormeProduit
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

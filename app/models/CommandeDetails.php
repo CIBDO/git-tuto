@@ -65,9 +65,6 @@ class CommandeDetails extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return CommandeDetails
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

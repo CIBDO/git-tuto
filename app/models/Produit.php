@@ -112,9 +112,6 @@ class Produit extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Produit
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

@@ -102,9 +102,6 @@ class Personnel extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Personnel
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

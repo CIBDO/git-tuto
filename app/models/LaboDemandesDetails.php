@@ -47,9 +47,6 @@ class LaboDemandesDetails extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return LaboDemandesDetails
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

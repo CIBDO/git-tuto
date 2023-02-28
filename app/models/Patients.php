@@ -218,9 +218,6 @@ class Patients extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Patients|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

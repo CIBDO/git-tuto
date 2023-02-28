@@ -33,9 +33,6 @@ class DiagnosticSource extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return DiagnosticSource
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

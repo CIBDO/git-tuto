@@ -58,9 +58,6 @@ class ConsultationsConstantes extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return ConsultationsConstantes
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

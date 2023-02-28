@@ -46,9 +46,6 @@ class FSolde extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FSolde
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

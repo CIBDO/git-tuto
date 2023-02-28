@@ -40,9 +40,6 @@ class TypeProduit extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return TypeProduit
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

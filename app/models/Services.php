@@ -41,9 +41,6 @@ class Services extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Services
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

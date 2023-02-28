@@ -40,9 +40,6 @@ class CsMotifs extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return CsMotifs
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

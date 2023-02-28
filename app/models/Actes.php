@@ -73,8 +73,5 @@ class Actes extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Actes|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 }

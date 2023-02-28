@@ -54,9 +54,6 @@ class FSousCompte extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FSousCompte
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

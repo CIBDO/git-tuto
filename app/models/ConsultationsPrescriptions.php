@@ -70,9 +70,6 @@ class ConsultationsPrescriptions extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return ConsultationsPrescriptions
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

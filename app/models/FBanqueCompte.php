@@ -47,9 +47,6 @@ class FBanqueCompte extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FBanqueCompte
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

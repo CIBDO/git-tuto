@@ -150,9 +150,6 @@ class DossiersConsultations extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return DossiersConsultations
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

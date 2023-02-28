@@ -70,9 +70,6 @@ class FPlanification extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FPlanification
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

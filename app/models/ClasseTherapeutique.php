@@ -40,9 +40,6 @@ class ClasseTherapeutique extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return ClasseTherapeutique
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

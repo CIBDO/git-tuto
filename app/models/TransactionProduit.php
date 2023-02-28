@@ -107,9 +107,6 @@ class TransactionProduit extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return TransactionProduit
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

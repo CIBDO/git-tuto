@@ -13,7 +13,7 @@ return new \Phalcon\Config(array(
         'host'        => 'localhost',
         'username'    => 'root',
         'password'    => 'root',
-        'dbname'      => 'target_db',
+        'dbname'      => 'target_db_old',
         'charset'     => 'utf8',
     ),
     'application' => array(
@@ -33,7 +33,7 @@ return new \Phalcon\Config(array(
         'libraryDir'                => APP_PATH . '/library/',
         'cacheDir'                  => BASE_PATH . '/cache/',
         'baseUri'                   => '/',
-        
+
     ),
     'logging' => array(
         'file'           	=> 'log/target.log',

@@ -38,9 +38,6 @@ class LaboAntibiotiques extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return LaboAntibiotiques
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

@@ -52,9 +52,6 @@ class RuptureStock extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return RuptureStock
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

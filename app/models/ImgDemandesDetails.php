@@ -65,9 +65,6 @@ class ImgDemandesDetails extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return ImgDemandesDetails
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

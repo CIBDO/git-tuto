@@ -148,9 +148,6 @@ class Prestations extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Prestations
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

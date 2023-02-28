@@ -40,9 +40,6 @@ class FDesignation extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FDesignation
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

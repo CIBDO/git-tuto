@@ -59,9 +59,6 @@ class PrixActes extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return PrixActes
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

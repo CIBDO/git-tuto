@@ -140,9 +140,6 @@ class RecuMedicament extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return RecuMedicament
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

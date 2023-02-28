@@ -64,9 +64,6 @@ class Inventaire extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Inventaire
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

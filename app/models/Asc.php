@@ -74,9 +74,6 @@ class Asc extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Asc|\Phalcon\Mvc\Model\ResultInterface
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

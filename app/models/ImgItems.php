@@ -53,9 +53,6 @@ class ImgItems extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return ImgItems
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

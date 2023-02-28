@@ -9,7 +9,7 @@ class CaisseController extends ControllerBase {
 
 
     public function indexAction($patient_id = 0) {
-        
+
         //$typeAssurancelist = TypeAssurance::find();
     	$typeAssurancelist = TypeAssurance::query()
 	    							->columns("CONCAT(id, '|', taux) as id, libelle as libelle")
@@ -56,7 +56,7 @@ class CaisseController extends ControllerBase {
 
                 if($data['id'] > 0){
 
-                    $patientsAssurance = PatientsAssurance::findFirst(array("patients_id = :patients_id: AND type_assurance_id = :type_assurance_id:", 
+                    $patientsAssurance = PatientsAssurance::findFirst(array("patients_id = :patients_id: AND type_assurance_id = :type_assurance_id:",
                                         "bind" => array("patients_id" => $data['id'], "type_assurance_id" => $data['type_assurance_id']) ));
                     if(!$patientsAssurance){
                         $patientsAssurance = new PatientsAssurance();
@@ -77,7 +77,7 @@ class CaisseController extends ControllerBase {
                     $patientsAssurance[0]->autres_infos        = $data['autres_infos'];
                     $patientsAssurance[0]->type_assurance_id   = $data['type_assurance_id'];
                     $patient->patientsAssurance                = $PatientsAssurance[0];
-                }    	
+                }
 	        }
 
 	        //Le ticket
@@ -123,7 +123,7 @@ class CaisseController extends ControllerBase {
 	        		$prestationsDetails[$key]->montant_patient = $prestationsDetails[$key]->montant_normal;
 	        	}
 	        	$prestationsDetails[$key]->montant_restant = $prestationsDetails[$key]->montant_normal
-						        								- 
+						        								-
 						        								$prestationsDetails[$key]->montant_patient;
 	        	$prestationsDetails[$key]->quantite = $data['quantite'][$key];
 
@@ -217,7 +217,7 @@ class CaisseController extends ControllerBase {
 
         if($patient_id != 0){
             $patient = Patients::findFirst($patient_id);
-            if($patient){                
+            if($patient){
                 Phalcon\Tag::setDefaults(array(
                     "id" => $patient->id,
                     "nom" => $patient->nom,
@@ -271,7 +271,7 @@ class CaisseController extends ControllerBase {
     }
 
     public function etatTicketAction(){
-        
+
         $date1 = $date2 = date("Y-m-d");
         $etat = 1;
     	if($this->request->get("date1")){
@@ -293,9 +293,9 @@ class CaisseController extends ControllerBase {
         ));
 
         $builder = $this->modelsManager->createBuilder();
-        $tickets = $builder->columns("prestations.id, prestations.date, prestations.montant_normal, prestations.montant_difference, prestations.montant_patient, prestations.montant_restant, prestations.etat, prestations.motif_annulation, 
-        		patients.id as patient_id, CONCAT(patients.prenom, ' ', patients.nom) as patients_nom, 
-        		usercaissier.id as caissier_id, CONCAT(usercaissier.prenom, ' ', usercaissier.nom) as caissier_nom, 
+        $tickets = $builder->columns("prestations.id, prestations.date, prestations.montant_normal, prestations.montant_difference, prestations.montant_patient, prestations.montant_restant, prestations.etat, prestations.motif_annulation,
+        		patients.id as patient_id, CONCAT(patients.prenom, ' ', patients.nom) as patients_nom,
+        		usercaissier.id as caissier_id, CONCAT(usercaissier.prenom, ' ', usercaissier.nom) as caissier_nom,
         		typeAssurance.libelle as assurance_libelle, CONCAT(typeAssurance.taux, '%') as assurance_taux")
             ->addfrom('Prestations', 'prestations')
             ->join('Patients', 'patients.id = prestations.patients_id', 'patients', 'INNER')
@@ -311,7 +311,7 @@ class CaisseController extends ControllerBase {
     }
 
     public function etatTicketDetailsAction(){
-        
+
         $date1 = $date2 = date("Y-m-d");
         $etat = 1;
         if($this->request->get("date1")){
@@ -333,18 +333,18 @@ class CaisseController extends ControllerBase {
         ));
 
         $builder = $this->modelsManager->createBuilder();
-        $tickets = $builder->columns("prestations.id, prestations.date, prestations.montant_normal, prestations.montant_patient, prestations.montant_restant, prestations.etat, 
-                patients.id as patient_id, CONCAT(patients.prenom, ' ', patients.nom) as patients_nom, 
-                usercaissier.id as caissier_id, CONCAT(usercaissier.prenom, ' ', usercaissier.nom) as caissier_nom, CONCAT(userPrestataire.prenom, ' ', userPrestataire.nom) as prestataire_nom, 
+        $tickets = $builder->columns("prestations.id, prestations.date, prestations.montant_normal, prestations.montant_patient, prestations.montant_restant, prestations.etat,
+                patients.id as patient_id, CONCAT(patients.prenom, ' ', patients.nom) as patients_nom,
+                usercaissier.id as caissier_id, CONCAT(usercaissier.prenom, ' ', usercaissier.nom) as caissier_nom, CONCAT(userPrestataire.prenom, ' ', userPrestataire.nom) as prestataire_nom,
                 typeAssurance.libelle as assurance_libelle, CONCAT(typeAssurance.taux, '%') as assurance_taux,
-                prestationsDetails.montant_normal as d_montant_normal, 
-                (prestationsDetails.montant_unitaire_difference * prestationsDetails.quantite) as d_montant_difference, 
-                ( (prestationsDetails.montant_unitaire_difference * prestationsDetails.quantite) + prestationsDetails.montant_patient) as d_montant_percu, 
-                prestationsDetails.quantite as d_quantite, 
-                prestationsDetails.montant_patient as d_montant_patient, 
-                (prestationsDetails.montant_normal - prestationsDetails.montant_patient ) as d_reste, 
-                actes.libelle as a_libelle, 
-                actes.unite as a_unite 
+                prestationsDetails.montant_normal as d_montant_normal,
+                (prestationsDetails.montant_unitaire_difference * prestationsDetails.quantite) as d_montant_difference,
+                ( (prestationsDetails.montant_unitaire_difference * prestationsDetails.quantite) + prestationsDetails.montant_patient) as d_montant_percu,
+                prestationsDetails.quantite as d_quantite,
+                prestationsDetails.montant_patient as d_montant_patient,
+                (prestationsDetails.montant_normal - prestationsDetails.montant_patient ) as d_reste,
+                actes.libelle as a_libelle,
+                actes.unite as a_unite
                 ")
             ->addfrom('Prestations', 'prestations')
             ->join('PrestationsDetails', 'prestationsDetails.prestations_id = prestations.id', 'prestationsDetails', 'INNER')
@@ -408,7 +408,7 @@ class CaisseController extends ControllerBase {
                                          array('date1' => $date1, 'date2' => $date2) );
         $rq = $builder->getQuery()->execute();
         $this->view->montantDifference = (count($rq)>0) ? $rq[0]['montant'] : 0;
-        
+
         //Montant encaissé
         $builder = $this->modelsManager->createBuilder();
         $rq = $builder->columns("SUM(prestations.montant_patient) as montant")
@@ -559,7 +559,7 @@ class CaisseController extends ControllerBase {
         $rq = $builder->getQuery()->execute()->setHydrateMode(Resultset::HYDRATE_OBJECTS)
                               ->toArray();
         $this->view->venteParResidences = json_encode($rq, JSON_PRETTY_PRINT);
-    	
+
     }
 
 }

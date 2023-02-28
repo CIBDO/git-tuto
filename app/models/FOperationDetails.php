@@ -65,9 +65,6 @@ class FOperationDetails extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FOperationDetails
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

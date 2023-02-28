@@ -52,9 +52,6 @@ class FCompte extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FCompte
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

@@ -58,9 +58,6 @@ class FormsResults extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return FormsResults
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

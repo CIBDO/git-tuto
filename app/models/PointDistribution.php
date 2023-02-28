@@ -55,9 +55,6 @@ class PointDistribution extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return PointDistribution
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

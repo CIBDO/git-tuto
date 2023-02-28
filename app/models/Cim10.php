@@ -93,9 +93,6 @@ class Cim10 extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Cim10
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

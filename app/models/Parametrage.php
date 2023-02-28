@@ -140,9 +140,6 @@ class Parametrage extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Parametrage
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

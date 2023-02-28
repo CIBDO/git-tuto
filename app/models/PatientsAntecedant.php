@@ -58,9 +58,6 @@ class PatientsAntecedant extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return PatientsAntecedant
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

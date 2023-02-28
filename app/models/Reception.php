@@ -67,9 +67,6 @@ class Reception extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Reception
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }

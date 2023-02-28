@@ -84,9 +84,6 @@ class Fournisseur extends \Phalcon\Mvc\Model
      * @param mixed $parameters
      * @return Fournisseur
      */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+    
 
 }
